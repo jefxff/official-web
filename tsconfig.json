@@ -25,6 +25,10 @@
       "@fmw/auth": ["./src/packages/auth"],
       "@fmw/search": ["./src/packages/search"],
       "@fmw/publish": ["./src/packages/publish"],
+      "@fmw/storage": ["./src/packages/storage"],
+      "@fmw/storage/*": ["./src/packages/storage/*"],
+      "@fmw/markdown": ["./src/packages/markdown"],
+      "@fmw/i18n-validate": ["./src/packages/i18n-validate"],
       "@fmw/ai": ["./src/packages/ai"],
       "@fmw/ai/*": ["./src/packages/ai/*"],
       "@fmw/observability": ["./src/packages/observability"]

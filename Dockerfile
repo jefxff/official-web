@@ -34,6 +34,12 @@ COPY --from=builder /app/public ./public
 COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
 COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
 
+# 媒体上传（local provider）落盘目录：必须在切换用户前创建并授权，
+# 否则编辑上传会因 EACCES 失败。多副本部署时应把它换成共享挂载（NFS / 云盘），
+# 或改用 MEDIA_STORAGE=s3 直传对象存储（见 docs/ops-runbook.md）。
+ENV MEDIA_ROOT=/app/.media
+RUN mkdir -p /app/.media && chown -R nextjs:nodejs /app/.media
+
 USER nextjs
 EXPOSE 3000
 CMD ["node", "server.js"]

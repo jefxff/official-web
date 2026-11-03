@@ -80,3 +80,29 @@ model Article {
   publishedAt DateTime @default(now())
   createdAt DateTime  @default(now())
 }
+
+// AI 助手会话（P24 增量：多轮上下文 + 会话留存）
+// 隐私边界：不记录 IP / User-Agent，只留随机 clientId 用于同一访客的会话归属；
+// 留存期与清理方式见 docs/ops-runbook.md。
+model AiConversation {
+  id            String      @id @default(cuid())
+  locale        String      @default("zh")
+  clientId      String?
+  createdAt     DateTime    @default(now())
+  lastMessageAt DateTime    @default(now())
+  messages      AiMessage[]
+
+  @@index([clientId, lastMessageAt])
+  @@index([lastMessageAt])
+}
+
+model AiMessage {
+  id             String         @id @default(cuid())
+  conversationId String
+  conversation   AiConversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  role           String // user | assistant
+  content        String
+  createdAt      DateTime       @default(now())
+
+  @@index([conversationId, createdAt])
+}

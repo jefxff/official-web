@@ -17,6 +17,9 @@ const assetPrefix = process.env.NEXT_PUBLIC_ASSET_PREFIX ?? "";
 const nextConfig: NextConfig = {
   reactStrictMode: true,
   assetPrefix: assetPrefix || undefined,
+  // 部署镜像按 standalone 产出（Dockerfile 复制 .next/standalone）：
+  // 不开这一项时该目录根本不存在，镜像会缺 server.js 而启动失败。
+  output: "standalone",
   env: {
     BUILD_TARGET: buildTarget,
     NEXT_PUBLIC_SITE_URL: siteUrl,
@@ -32,19 +35,39 @@ const nextConfig: NextConfig = {
     ],
   },
   async headers() {
-    return [
+    // CSP 由 middleware 逐请求下发（分档策略见 src/packages/security/csp.ts），
+    // 这里只放与请求无关、可长期静态生效的响应头。
+    const baseHeaders = [
+      { key: "X-Content-Type-Options", value: "nosniff" },
+      { key: "X-Frame-Options", value: "SAMEORIGIN" },
+      { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
       {
-        source: "/:path*",
-        headers: [
-          // 基础安全头；CSP 在 S3 前结合 Next 内联脚本 nonce 方案细化（见评审意见）。
-          { key: "X-Content-Type-Options", value: "nosniff" },
-          { key: "X-Frame-Options", value: "SAMEORIGIN" },
-          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
-          {
-            key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=()",
-          },
-        ],
+        key: "Permissions-Policy",
+        value: "camera=(), microphone=(), geolocation=()",
+      },
+      // 隔离跨源窗口引用：防止被第三方站点通过 window.opener 反向操纵。
+      { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
+      { key: "X-DNS-Prefetch-Control", value: "off" },
+    ];
+
+    // HSTS 只在生产开启：本地下发会让浏览器强制 https，污染开发环境的 localhost。
+    if (process.env.NODE_ENV === "production") {
+      baseHeaders.push({
+        key: "Strict-Transport-Security",
+        value: "max-age=31536000; includeSubDomains",
+      });
+    }
+
+    return [
+      { source: "/:path*", headers: baseHeaders },
+      {
+        // 后台与写接口一律禁止任何中间层缓存（含 CDN 的边缘缓存）。
+        source: "/admin/:path*",
+        headers: [{ key: "Cache-Control", value: "no-store, max-age=0" }],
+      },
+      {
+        source: "/api/v1/admin/:path*",
+        headers: [{ key: "Cache-Control", value: "no-store, max-age=0" }],
       },
     ];
   },

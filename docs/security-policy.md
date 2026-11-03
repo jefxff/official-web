@@ -49,6 +49,45 @@
 - **性质**：全部为 devDependencies，仅影响本地/CI 的 lint 阶段，不进入生产构建产物（`Dockerfile` 采用 standalone 输出，仅携带运行时依赖）。
 - **修复路径**：等待 Next 16 升级时一并升级 eslint 生态（见下方"待办"）。
 
+## 内容安全策略（CSP）分档
+
+CSP 由 `src/middleware.ts` 逐请求下发，策略构造集中在 `src/packages/security/csp.ts`。**分两档而非全站 nonce**，理由如下。
+
+| 路由类型 | `script-src` | 渲染模式 | 缓存 |
+|---|---|---|---|
+| 公开页（`/[locale]/**`、`/sitemap.xml` 等） | `'self' 'unsafe-inline'` | SSG / ISR | 可被 CDN / 边缘长缓存 |
+| 后台（`/admin/**`） | `'self' 'nonce-<随机>' 'strict-dynamic'` | 强制动态 | `no-store` |
+
+**为什么公开页不用 nonce**：nonce 必须逐请求生成并写进每个 `<script>`，因此页面无法预渲染成静态产物。而本项目的双区域架构（国内源站 + 海外 Cloudflare Worker 边缘缓存回源）依赖静态产物才能命中边缘缓存；一旦改成 nonce，公开页会退化为「每次请求穿透回源」，双区域设计的主要收益归零。这个交换不划算，故不做。
+
+作为补偿措施（缺一不可，改动时请保持）：
+
+1. **全仓库不使用 `dangerouslySetInnerHTML`**（资讯正文由自写的 `@fmw/markdown` 渲染为 React 元素，不解析原始 HTML）；
+2. Markdown 链接只放行 `http(s)://`、`mailto:`、站内 `/...` 与 `#...`，`javascript:` / `data:` 降级为纯文本；
+3. 后台整体 `force-dynamic`（`src/app/admin/layout.tsx`），nonce 前提才成立——若有人给后台加 `revalidate` 或静态化，nonce 会失效并导致后台脚本被 CSP 阻断；
+4. 上传接口拒绝 SVG（SVG 可内嵌脚本，作为同源资源会绕开 `script-src`）。
+
+验证方式（生产构建后执行）：
+
+```bash
+npm run build && npm start
+curl -sD - -o /dev/null http://127.0.0.1:3000/zh | grep -i content-security-policy        # 期望：'unsafe-inline'，无 nonce
+curl -sD - -o /dev/null http://127.0.0.1:3000/admin/login | grep -i content-security-policy # 期望：nonce-... 'strict-dynamic'
+curl -s http://127.0.0.1:3000/admin/login | grep -c 'script[^>]*nonce='                     # 期望：等于 <script> 标签总数
+```
+
+## 其他安全响应头
+
+| 头 | 值 | 说明 |
+|---|---|---|
+| `Strict-Transport-Security` | `max-age=31536000; includeSubDomains` | 仅生产下发（本地会污染 localhost） |
+| `X-Content-Type-Options` | `nosniff` | 全站 |
+| `X-Frame-Options` | `SAMEORIGIN` | 与 `frame-ancestors 'self'` 双重保险 |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | 全站 |
+| `Permissions-Policy` | `camera=(), microphone=(), geolocation=()` | 全站 |
+| `Cross-Origin-Opener-Policy` | `same-origin` | 防 `window.opener` 反向操控 |
+| `Cache-Control` | `no-store`（`/admin/**`、`/api/v1/admin/**`） | 后台与写接口不得被任何中间层缓存 |
+
 ## npm overrides（传递依赖强制提升）
 
 以下漏洞位于传递依赖树深处，直接升级父包会引发 major 变更连锁返工，故用 `overrides` 精准提升：
@@ -75,6 +114,6 @@
 
 ## 待办
 
-- **Next 16 升级**：届时一并升级 eslint 生态，消除全部 moderate 条目。注意 `next lint` 在 Next 15.5 已弃用、Next 16 将移除，需迁至 ESLint CLI（`npx @next/codemod@canary next-lint-to-eslint-cli .`），否则升版后 CI 直接失败。
+- **Next 16 升级**：届时一并升级 eslint 生态，消除全部 moderate 条目。（`next lint` 迁移已在 v1.2 交付中完成：`npm run lint` 现为 `eslint . --max-warnings=0`。）
 - **引入 osv-scanner**：作为 `npm audit` 的补充，覆盖 npm 之外的生态与更精确的可达性判定。
 - **门禁阈值复评**：每季度复查一次 moderate 豁免登记，任一条目命中实际用法即升级为 high 处理。

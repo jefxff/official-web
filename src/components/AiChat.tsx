@@ -11,6 +11,28 @@ interface Msg {
 // 功能开关：默认显示（demo）。设 NEXT_PUBLIC_AI_ASSISTANT_ENABLED=false 可关闭。
 const AI_VISIBLE = process.env.NEXT_PUBLIC_AI_ASSISTANT_ENABLED !== "false";
 
+const CLIENT_KEY = "fmw.ai.clientId";
+
+/**
+ * 匿名标识：只用于把会话归属到同一浏览器，不含任何可识别信息。
+ * 放 localStorage 而非 Cookie —— 避免为一个匿名 ID 触发 Cookie 同意流程。
+ */
+function ensureClientId(): string {
+  try {
+    const cached = localStorage.getItem(CLIENT_KEY);
+    if (cached) return cached;
+    const id =
+      typeof crypto !== "undefined" && "randomUUID" in crypto
+        ? crypto.randomUUID()
+        : `c${Date.now().toString(36)}${Math.random().toString(36).slice(2, 10)}`;
+    localStorage.setItem(CLIENT_KEY, id);
+    return id;
+  } catch {
+    // 隐私模式 / 禁用存储：退化为一次性 id，会话不跨刷新延续（不影响回答）。
+    return `c${Date.now().toString(36)}`;
+  }
+}
+
 export default function AiChat() {
   const t = useTranslations("ai");
   const locale = useLocale();
@@ -19,8 +41,42 @@ export default function AiChat() {
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [error, setError] = useState(false);
+  // 服务端会话 id（DB 模式才返回；seed 模式为 null，退化为单轮问答）
+  const [conversationId, setConversationId] = useState<string | null>(null);
   const scrollRef = useRef<HTMLDivElement>(null);
   const abortRef = useRef<AbortController | null>(null);
+
+  // 会话 id 按语言分别保存：中英站是不同的对话，混用会让上下文语言错乱。
+  const storageKey = `fmw.ai.convo.${locale}`;
+
+  useEffect(() => {
+    try {
+      setConversationId(sessionStorage.getItem(storageKey));
+    } catch {
+      /* 存储不可用时保持无状态 */
+    }
+  }, [storageKey]);
+
+  function startNewChat() {
+    setMessages([]);
+    setError(false);
+    setConversationId(null);
+    try {
+      sessionStorage.removeItem(storageKey);
+    } catch {
+      /* 忽略 */
+    }
+  }
+
+  function rememberConversation(id: string | null) {
+    setConversationId(id);
+    try {
+      if (id) sessionStorage.setItem(storageKey, id);
+      else sessionStorage.removeItem(storageKey);
+    } catch {
+      /* 忽略 */
+    }
+  }
 
   useEffect(() => {
     if (scrollRef.current) {
@@ -51,6 +107,9 @@ export default function AiChat() {
         body: JSON.stringify({
           message: q,
           locale,
+          conversationId: conversationId ?? undefined,
+          clientId: ensureClientId(),
+          // 无状态降级（seed 模式）时服务端没有历史，靠这里带回上下文。
           history: history.map((m) => ({ role: m.role, content: m.content })),
         }),
         signal: ac.signal,
@@ -75,7 +134,10 @@ export default function AiChat() {
           const payload = line.slice(5).trim();
           try {
             const evt = JSON.parse(payload);
-            if (evt.type === "token") {
+            if (evt.type === "meta") {
+              // 服务端确认/新建会话后回传 id，后续轮次据此续聊。
+              rememberConversation(evt.conversationId ?? null);
+            } else if (evt.type === "token") {
               acc += evt.text;
               setMessages((m) => {
                 const copy = [...m];
@@ -109,14 +171,35 @@ export default function AiChat() {
               <div className="text-sm font-semibold">{t("title")}</div>
               <div className="text-[11px] opacity-80">{t("subtitle")}</div>
             </div>
-            <button
-              onClick={() => setOpen(false)}
-              aria-label={t("close")}
-              className="text-white/90 hover:text-white text-lg leading-none"
-            >
-              ✕
-            </button>
+            <div className="flex items-center gap-3">
+              {messages.length > 0 && (
+                <button
+                  onClick={startNewChat}
+                  aria-label={t("newChat")}
+                  title={t("newChat")}
+                  className="text-white/80 hover:text-white text-sm leading-none"
+                >
+                  ↻
+                </button>
+              )}
+              <button
+                onClick={() => setOpen(false)}
+                aria-label={t("close")}
+                className="text-white/90 hover:text-white text-lg leading-none"
+              >
+                ✕
+              </button>
+            </div>
           </div>
+
+          {conversationId && messages.length === 0 && (
+            <div className="flex items-center justify-between bg-[var(--color-bg)] px-4 py-2 text-[11px] text-[var(--color-sub)]">
+              <span>{t("continued")}</span>
+              <button onClick={startNewChat} className="underline hover:text-[var(--color-brand)]">
+                {t("newChat")}
+              </button>
+            </div>
+          )}
 
           <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm">
             {messages.length === 0 && (

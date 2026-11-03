@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { getArticleBySlug, getArticles } from "@/packages/data";
 import { Link } from "@/i18n/routing";
 import { buildMetadata } from "@/packages/seo";
+import { Markdown } from "@fmw/markdown";
 import dayjs from "dayjs";
 
 export async function generateStaticParams() {
@@ -48,8 +49,17 @@ export default async function ArticlePage({
         {t("publishedOn")} {dayjs(article.publishedAt).format("YYYY-MM-DD")}
       </div>
       <h1 className="text-2xl font-semibold mb-6">{article.title}</h1>
+      {article.coverImage && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img
+          src={article.coverImage}
+          alt={article.title}
+          className="mb-6 w-full rounded-lg border border-slate-200 object-cover"
+          loading="eager"
+        />
+      )}
       <div className="prose-page text-[var(--color-ink)] leading-relaxed">
-        <p>{article.body}</p>
+        <Markdown source={article.body} />
       </div>
     </article>
   );

@@ -8,6 +8,7 @@ import {
 } from "@fmw/ai";
 import { captureException, logger } from "@fmw/observability";
 import { isSentenceBoundary } from "@fmw/ai/sentence";
+import { appendTurn, resolveConversation } from "@fmw/ai/persistence";
 import type { Locale } from "@/i18n/routing";
 
 export const dynamic = "force-dynamic";
@@ -16,6 +17,9 @@ export const runtime = "nodejs";
 const bodySchema = z.object({
   message: z.string().min(1).max(2000),
   locale: z.enum(["zh", "en"]).optional(),
+  // 会话标识：放入 body 而非 Cookie，避免为匿名访客设置跟踪 Cookie（无需 Cookie 同意弹窗）。
+  conversationId: z.string().min(1).max(64).optional(),
+  clientId: z.string().min(1).max(64).optional(),
   history: z
     .array(
       z.object({
@@ -78,7 +82,7 @@ export async function POST(req: NextRequest) {
       { status: 400 }
     );
   }
-  const { message, locale = "zh", history = [] } = parsed.data;
+  const { message, locale = "zh", history = [], conversationId, clientId } = parsed.data;
 
   if (rateLimited(clientIp(req))) {
     return new Response(JSON.stringify({ error: "rate_limited" }), {
@@ -87,11 +91,20 @@ export async function POST(req: NextRequest) {
   }
 
   const loc = locale as Locale;
-  const historyMsgs = history as ChatMessage[];
+
+  // 服务端历史优先：DB 模式下多轮上下文以库为准（前端传入的 history 只作为无状态降级来源），
+  // 这样即使前端刷新/被篡改，模型看到的上下文仍是真实发生过的那几轮。
+  const convo = await resolveConversation({ conversationId, clientId, locale: loc });
+  const historyMsgs: ChatMessage[] =
+    convo.history.length > 0 ? convo.history : (history as ChatMessage[]);
 
   const stream = new ReadableStream<Uint8Array>({
     async start(controller) {
+      let answer = "";
       try {
+        // 首帧回传会话标识：前端据此续聊（无状态模式下为 null，前端保持一次一答）。
+        controller.enqueue(sse({ type: "meta", conversationId: convo.id }));
+
         const ctx = await buildContextFor(message, loc);
         const provider = getProvider();
 
@@ -102,6 +115,7 @@ export async function POST(req: NextRequest) {
           while (i < buf.length) {
             if (isSentenceBoundary(buf, i)) {
               const sentence = buf.slice(0, i + 1);
+              answer += sentence;
               controller.enqueue(sse({ type: "token", text: sentence }));
               buf = buf.slice(i + 1);
               i = 0;
@@ -122,11 +136,19 @@ export async function POST(req: NextRequest) {
         }
         // 下发剩余尾片（无句末标点的收尾文本）
         if (buf.trim().length > 0) {
+          answer += buf;
           controller.enqueue(sse({ type: "token", text: buf }));
         }
+        // 落库后再收尾：服务端渲染函数返回后进程可能被回收，不可 fire-and-forget。
+        await appendTurn(convo.id, message, answer);
         controller.enqueue(sse({ type: "done" }));
         controller.close();
-        logger.info("ai", "chat completed", { locale: loc, mpn: ctx.analysis.mpn });
+        logger.info("ai", "chat completed", {
+          locale: loc,
+          mpn: ctx.analysis.mpn,
+          conversationId: convo.id,
+          persisted: convo.id !== null,
+        });
       } catch (err) {
         captureException(err, "ai.chat");
         try {

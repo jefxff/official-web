@@ -108,6 +108,8 @@
     "thinking": "Thinking…",
     "error": "I can't answer right now. Please retry or visit Contact.",
     "close": "Close",
-    "open": "Open AI Assistant"
+    "open": "Open AI Assistant",
+    "newChat": "New chat",
+    "continued": "Continuing this conversation"
   }
 }

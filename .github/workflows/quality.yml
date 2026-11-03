@@ -32,6 +32,15 @@ jobs:
       - name: Schema behavior test
         run: npm run test:schema
 
+      - name: Storage & SigV4 test
+        run: npm run test:storage
+
+      - name: Content (Markdown / i18n) test
+        run: npm run test:content
+
+      - name: Observability (APM envelope) test
+        run: npm run test:observability
+
       - name: Dependency security gate
         run: npm run audit
 

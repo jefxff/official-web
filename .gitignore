@@ -27,6 +27,9 @@ src/packages/db/generated/
 # typescript
 *.tsbuildinfo
 
+# 媒体上传（local provider）——不入库，生产挂载共享存储
+.media/
+
 # editor
 .vscode/
 .idea/
