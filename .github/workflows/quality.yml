@@ -29,7 +29,10 @@ jobs:
       - name: Lint
         run: npm run lint
 
-      - name: Audit (high+)
+      - name: Schema behavior test
+        run: npm run test:schema
+
+      - name: Dependency security gate
         run: npm run audit
 
       - name: Build (cn target)

@@ -45,7 +45,7 @@ function isCacheable(request, response) {
   return true; // html / js / css / 图片 等
 }
 
-export default {
+const worker = {
   async fetch(request, env) {
     const url = new URL(request.url);
     const originHost = env.ORIGIN_HOST;
@@ -85,3 +85,5 @@ export default {
     return new Response(response.body, { status: response.status, headers: h });
   },
 };
+
+export default worker;

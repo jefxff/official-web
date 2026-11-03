@@ -18,7 +18,8 @@
 - **AI 助手**：`@fmw/ai` —— 槽位填充接地（不臆造参数）+ 句子级 SSE 流式 + Provider 抽象（Mock / OpenAI）
 - **可观测性**：`@fmw/observability` —— 结构化 JSON 日志 + `captureException`（预留 Sentry 扩展点）
 - **海外边缘**：`deploy/worker` —— Cloudflare Worker，缓存 MISS 回落反代国内源站（关闭「新页面 404」缺口）+ 写面屏蔽
-- **质量门禁**：`lint` + `tsc` + `npm audit` + `build`，GitHub Actions 已配（`.github/workflows/quality.yml`）
+- **质量门禁**：`lint`（ESLint CLI）+ `tsc` + `schema 行为回归测试` + `依赖安全门禁` + `build`，GitHub Actions 已配（`.github/workflows/quality.yml`）
+- **依赖安全**：分级门禁（high/critical 零豁免强制阻断；moderate 须在 `docs/security-policy.md` 登记并写明判定）
 
 ## 目录结构
 
@@ -28,7 +29,11 @@ FMW-app/
 │  ├─ schema.prisma            # 领域模型（产品/系列/资讯，含验证等级）
 │  └─ constraint.sql           # DB 层约束（分级验证必填证据）+ 索引，幂等可重跑
 ├─ messages/{zh,en}.json       # 双语字典
-├─ scripts/seed.ts             # 将 seed JSON 灌入 PG（幂等 upsert）
+├─ docs/security-policy.md     # 依赖安全策略（分级门禁 + moderate 豁免登记）
+├─ scripts/
+│  ├─ seed.ts                  # 将 seed JSON 灌入 PG（幂等 upsert）
+│  ├─ audit-gate.ts            # 依赖安全分级门禁
+│  └─ test-zod-behavior.ts     # schema 行为回归测试（zod v4 迁移保障）
 ├─ deploy/worker/              # 海外 Cloudflare Worker（回源 + 写面屏蔽）
 ├─ src/
 │  ├─ middleware.ts            # 语言重定向（已排除 /api、/admin）
@@ -63,10 +68,24 @@ npm run dev          # 开发
 npm run build        # 生产构建（默认 cn 目标）
 npm run start        # 启动生产服务
 npm run typecheck    # 类型检查
-npm run lint         # ESLint
+npm run lint         # ESLint（CLI 模式，覆盖全仓库）
+npm run test:schema  # schema 行为回归测试（zod 校验语义）
+npm run audit        # 依赖安全门禁（分级：high 阻断 / moderate 须登记）
 npm run prisma:generate   # 生成 Prisma client
 npm run seed         # 向 PG 灌入 seed 数据（需 DATABASE_URL）
 ```
+
+## 依赖安全门禁
+
+`npm run audit` 执行**分级**策略，而非单一的 audit 阈值：
+
+| 等级 | 处置 |
+|---|---|
+| high / critical | 必须为 0，**无豁免机制**，出现即阻断 CI |
+| moderate | 必须在 `docs/security-policy.md` 的 `AUDIT-EXEMPTIONS` 区块登记并写明判定依据；未登记即阻断 |
+| 过期登记 | 漏洞已修复但未清理的登记条目，同样阻断（防止清单腐化） |
+
+传递依赖的安全修复通过 `package.json` 的 `overrides` 精准提升（`postcss`、`deepmerge-ts`），避免为此把 next/prisma 升到 major 版本引发连锁返工。完整策略、逐条判定与修复记录见 **[`docs/security-policy.md`](docs/security-policy.md)**。
 
 ## 环境变量
 
@@ -124,7 +143,9 @@ npm run seed         # 向 PG 灌入 seed 数据（需 DATABASE_URL）
 - **验证证据仅中文（已补齐）**：`verifiedEvidence` 现配 `verifiedEvidenceEn`；前台按 locale 选取，英文缺失时回落中文原文（不出现空白），后台表单可分别填写。
 - **Prisma `@@check` 语法**：当前 Prisma 版本不支持 `@@check` 属性，分级验证约束改由 `prisma/constraint.sql` 以原生 SQL 落地（幂等可重跑）。
 - **构建需在沙箱外执行**：清理 `.next` 会触发环境的批量删除安全阈值拦截，属环境限制而非代码问题。
-- **`next lint` 已弃用**：Next 15.5 起 `next lint` 标记弃用（Next 16 将移除）。升级到 ESLint CLI（`npx @next/codemod@canary next-lint-to-eslint-cli`）需在 S0 的 Next 16 兼容性 spike 一并处理，避免升版时 CI 直接失败。
+- **`next lint` 已弃用（已迁移）**：`next lint` 在 Next 15.5 标记弃用、Next 16 将移除。已提前迁至 ESLint CLI（`npm run lint` = `eslint . --max-warnings=0`），配置沿用现有 flat config。顺带修复了 `next lint` 覆盖不到的问题：`deploy/worker/src/worker.js` 的匿名默认导出、测试脚本的未使用变量；`next-env.d.ts`（Next 自动生成）已加入忽略列表。**升 Next 16 时 CI 无需再处理此项。**
+- **zod 已升级至 v4**：`zod@4.6.7` 修复了「超大受约束集合导致内存耗尽」漏洞（该漏洞命中后台写接口的运行时校验路径，属真实可利用风险）。v4 保留了本项目用到的全部 API 兼容层，行为回归由 `npm run test:schema`（24 项断言）保障并已接入 CI。
+- **`npm audit` 分级门禁**：单一 `--audit-level=high` 阈值在多次误报后容易被团队习惯性绕过，现改为三级门禁（见上）。
 
 **已实现**：S0–S1 全部；S2 后台认证（TOTP）、国内唯一写点（产品/系列/资讯 CRUD 写接口 + 后台 UI）、发布管线（缓存失效 + 搜索重建）、海外 Worker 回源、DB 层分级验证约束、种子脚本；S5 的 P24 AI 助手（槽位填充接地 + 句子级 SSE + 双端 feature flag + Mock/OpenAI Provider）；可观测性底座（结构化日志 + 异常捕获）。
 
