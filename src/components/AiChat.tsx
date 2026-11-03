@@ -163,21 +163,33 @@ export default function AiChat() {
   if (!AI_VISIBLE) return null;
 
   return (
-    <div className="fixed bottom-5 right-5 z-50 font-sans">
+    <div className="fixed right-4 bottom-4 z-50 md:right-6 md:bottom-6">
       {open ? (
-        <div className="flex flex-col w-[min(92vw,360px)] h-[min(70vh,520px)] bg-white rounded-2xl shadow-2xl border border-[var(--color-line)] overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 bg-[var(--color-brand)] text-white">
-            <div>
-              <div className="text-sm font-semibold">{t("title")}</div>
-              <div className="text-[11px] opacity-80">{t("subtitle")}</div>
+        <div className="flex h-[min(72vh,540px)] w-[min(92vw,380px)] flex-col overflow-hidden border border-[var(--color-line)] bg-[var(--color-void)] shadow-[var(--shadow-3)]">
+          {/* 头部：等宽标签 + 一个会呼吸的状态点，暗示「在线」而不是装饰 */}
+          <div className="flex items-center justify-between border-b border-[var(--color-line)] px-4 py-3">
+            <div className="flex items-center gap-2.5">
+              <span
+                className="h-1.5 w-1.5 bg-[var(--color-bench)]"
+                style={{ animation: "pulse-soft 2.4s ease-in-out infinite" }}
+                aria-hidden
+              />
+              <div>
+                <div className="text-[13px] font-semibold text-[var(--color-bone)]">
+                  {t("title")}
+                </div>
+                <div className="mono mt-0.5 text-[10px] tracking-[0.1em] text-[var(--color-muted)]">
+                  {t("subtitle")}
+                </div>
+              </div>
             </div>
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-1">
               {messages.length > 0 && (
                 <button
                   onClick={startNewChat}
                   aria-label={t("newChat")}
                   title={t("newChat")}
-                  className="text-white/80 hover:text-white text-sm leading-none"
+                  className="grid h-8 w-8 place-items-center text-[13px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-amber)]"
                 >
                   ↻
                 </button>
@@ -185,7 +197,7 @@ export default function AiChat() {
               <button
                 onClick={() => setOpen(false)}
                 aria-label={t("close")}
-                className="text-white/90 hover:text-white text-lg leading-none"
+                className="grid h-8 w-8 place-items-center text-[13px] text-[var(--color-muted)] transition-colors hover:text-[var(--color-bone)]"
               >
                 ✕
               </button>
@@ -193,41 +205,48 @@ export default function AiChat() {
           </div>
 
           {conversationId && messages.length === 0 && (
-            <div className="flex items-center justify-between bg-[var(--color-bg)] px-4 py-2 text-[11px] text-[var(--color-sub)]">
-              <span>{t("continued")}</span>
-              <button onClick={startNewChat} className="underline hover:text-[var(--color-brand)]">
+            <div className="flex items-center justify-between border-b border-[var(--color-line)] px-4 py-2">
+              <span className="mono text-[10px] tracking-[0.08em] text-[var(--color-muted)]">
+                {t("continued")}
+              </span>
+              <button
+                onClick={startNewChat}
+                className="mono text-[10px] tracking-[0.08em] text-[var(--color-amber)] uppercase"
+              >
                 {t("newChat")}
               </button>
             </div>
           )}
 
-          <div ref={scrollRef} className="flex-1 overflow-y-auto px-4 py-3 space-y-3 text-sm">
+          <div ref={scrollRef} className="flex-1 space-y-3 overflow-y-auto px-4 py-4 text-sm">
             {messages.length === 0 && (
-              <div className="text-[var(--color-ink)]/80">
-                <p>{t("welcome")}</p>
-                <div className="mt-3 flex flex-col gap-2">
+              <div>
+                <p className="text-[13.5px] leading-relaxed text-[var(--color-bone-2)]">
+                  {t("welcome")}
+                </p>
+                <div className="mt-4 flex flex-col gap-2">
                   {t.raw("suggestions").map((s: string) => (
                     <button
                       key={s}
                       onClick={() => send(s)}
-                      className="text-left text-xs rounded-lg border border-[var(--color-line)] px-3 py-2 hover:border-[var(--color-brand)] hover:text-[var(--color-brand)]"
+                      className="group flex items-center justify-between gap-3 border border-[var(--color-line)] px-3 py-2.5 text-left text-[12.5px] text-[var(--color-bone-2)] transition-colors hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]"
                     >
-                      {s}
+                      <span>{s}</span>
+                      <span className="text-[var(--color-muted)] transition-transform group-hover:translate-x-0.5 group-hover:text-[var(--color-amber)]">
+                        →
+                      </span>
                     </button>
                   ))}
                 </div>
               </div>
             )}
             {messages.map((m, i) => (
-              <div
-                key={i}
-                className={m.role === "user" ? "text-right" : "text-left"}
-              >
+              <div key={i} className={m.role === "user" ? "flex justify-end" : "flex justify-start"}>
                 <span
-                  className={`inline-block max-w-[85%] rounded-2xl px-3 py-2 whitespace-pre-wrap ${
+                  className={`inline-block max-w-[88%] px-3.5 py-2.5 text-[13px] leading-relaxed whitespace-pre-wrap ${
                     m.role === "user"
-                      ? "bg-[var(--color-brand)] text-white"
-                      : "bg-[var(--color-bg)] text-[var(--color-ink)]"
+                      ? "bg-[var(--color-amber)] text-[var(--color-on-brand)]"
+                      : "border border-[var(--color-line)] bg-[var(--color-surface)] text-[var(--color-bone-2)]"
                   }`}
                 >
                   {m.content || (thinking && i === messages.length - 1 ? t("thinking") : "")}
@@ -235,9 +254,11 @@ export default function AiChat() {
               </div>
             ))}
             {error && (
-              <div className="text-xs text-red-600">{t("error")}</div>
+              <div className="border-l-2 border-[var(--color-amber)] px-3 py-1.5 text-[12px] text-[var(--color-muted)]">
+                {t("error")}
+              </div>
             )}
-            <div className="text-[10px] text-[var(--color-ink)]/50">
+            <div className="mono pt-1 text-[10px] leading-relaxed tracking-[0.04em] text-[var(--color-muted)]">
               {t("disclaimer")}
             </div>
           </div>
@@ -247,20 +268,21 @@ export default function AiChat() {
               e.preventDefault();
               send(input);
             }}
-            className="flex items-center gap-2 border-t border-[var(--color-line)] p-3"
+            className="flex items-stretch gap-2 border-t border-[var(--color-line)] p-3"
           >
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
               placeholder={t("placeholder")}
-              className="flex-1 text-sm border border-[var(--color-line)] rounded-lg px-3 py-2 outline-none focus:border-[var(--color-brand)]"
+              className="input min-h-10 flex-1 text-[13px]"
             />
             <button
               type="submit"
               disabled={thinking || !input.trim()}
-              className="rounded-lg bg-[var(--color-brand)] text-white px-3 py-2 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+              className="grid w-11 place-items-center bg-[var(--color-amber)] text-[var(--color-on-brand)] transition-colors hover:bg-[var(--color-amber-2)] disabled:cursor-not-allowed disabled:opacity-40"
+              aria-label={t("send")}
             >
-              {t("send")}
+              →
             </button>
           </form>
         </div>
@@ -268,10 +290,12 @@ export default function AiChat() {
         <button
           onClick={() => setOpen(true)}
           aria-label={t("open")}
-          className="flex items-center gap-2 rounded-full bg-[var(--color-brand)] text-white pl-3 pr-4 py-3 shadow-2xl hover:opacity-90"
+          className="group flex items-center gap-2.5 border border-[var(--color-line)] bg-[var(--color-void)] py-2.5 pr-4 pl-3 shadow-[var(--shadow-3)] transition-colors hover:border-[var(--color-amber)]"
         >
-          <span className="text-lg">🤖</span>
-          <span className="text-sm font-medium">{t("title")}</span>
+          <span className="mono grid h-7 w-7 place-items-center border border-[var(--color-amber)] text-[10px] font-bold text-[var(--color-amber)]">
+            AI
+          </span>
+          <span className="text-[12.5px] font-medium text-[var(--color-bone)]">{t("title")}</span>
         </button>
       )}
     </div>

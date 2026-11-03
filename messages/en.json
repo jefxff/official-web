@@ -27,7 +27,23 @@
     "adv2Title": "Compliant & Trusted",
     "adv2Desc": "Tiered verification: key parameters ship with bench-tested evidence.",
     "adv3Title": "Global Delivery",
-    "adv3Desc": "Dual-region deployment (CN/Global) for fast, local response."
+    "adv3Desc": "Shipped from the domestic hub with COA; overseas projects supported locally by distributors.",
+    "seriesTitle": "Product Series",
+    "seriesDesc": "Three product lines organized by application — from signal-chain supply to power switching.",
+    "ctaTitle": "Need samples or a quote?",
+    "ctaDesc": "Send the part number and volume. Selection advice, samples and lead time within one business day.",
+    "ctaButton": "Contact sales",
+    "statParts": "Part numbers",
+    "statSeries": "Series",
+    "statDocs": "Documents",
+    "ticker": [
+      "Selection support",
+      "Datasheets",
+      "App notes",
+      "Bench reports",
+      "Third-party certification",
+      "Samples & volume"
+    ]
   },
   "products": {
     "title": "Products",
@@ -44,14 +60,27 @@
     "benchTested": "Bench-Tested",
     "datasheet": "Datasheet",
     "appNote": "Application Note",
-    "ctaQuote": "Request Sample / Quote"
+    "ctaQuote": "Request Sample / Quote",
+    "vInternal": "Internal",
+    "vDatasheet": "Datasheet",
+    "vBenchTested": "Bench-Tested",
+    "vCertified": "Certified",
+    "evidence": "Verification evidence",
+    "partCount": "{count} parts →",
+    "all": "All",
+    "filter": "Filter by category",
+    "count": "{count} parts",
+    "emptyHint": "Try another keyword, or ask us for a selection guide.",
+    "colProduct": "Product",
+    "colSpec": "Key spec"
   },
   "news": {
     "title": "News",
     "subtitle": "Company updates, product launches and technical articles.",
     "readMore": "Read more",
     "publishedOn": "Published on",
-    "backToList": "Back to list"
+    "backToList": "Back to list",
+    "items": "items"
   },
   "about": {
     "title": "About FMW",
@@ -59,7 +88,14 @@
     "mission": "Mission",
     "missionBody": "Empower the intelligence and green transition of every industry with reliable, low-power chips.",
     "culture": "Values",
-    "cultureBody": "Customer-centric, engineer-driven culture, and long-term craftsmanship on every chip."
+    "cultureBody": "Customer-centric, engineer-driven culture, and long-term craftsmanship on every chip.",
+    "statParts": "Parts",
+    "statSeries": "Series",
+    "statArticles": "Articles",
+    "quality": "Quality and verification",
+    "qualityBody": "Every specification is labelled with its verification level: datasheet value, internal bench test, or third-party certification. Bench results cite the report reference, and certified figures trace back to third-party lab reports — so qualification reviews do not require round trips to confirm which number is trustworthy.",
+    "global": "Global delivery",
+    "globalBody": "Samples and volume orders ship from the domestic hub, with COA and export documentation available on request. Overseas projects are supported locally by our distributor network, with engineers scheduled to the customer's timezone."
   },
   "contact": {
     "title": "Contact Us",
@@ -72,7 +108,11 @@
     "submitted": "We've received your message and will get back to you shortly.",
     "address": "Address",
     "phone": "Phone",
-    "emailLabel": "Email"
+    "emailLabel": "Email",
+    "sending": "Sending…",
+    "error": "Submission failed. Please retry later or email sales@fmw.example directly.",
+    "reply": "Reply within one business day",
+    "sla": "Average response"
   },
   "search": {
     "title": "Search",

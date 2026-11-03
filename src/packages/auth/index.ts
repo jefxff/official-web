@@ -18,7 +18,9 @@ const ADMIN_TOTP_SECRET = process.env.ADMIN_TOTP_SECRET ?? ""; // base32
 const AUTH_SECRET =
   process.env.AUTH_SECRET ?? "dev-only-insecure-secret-change-me";
 const SESSION_MAX_AGE = 60 * 60 * 8; // 8h
-export const ADMIN_COOKIE = "fmw_admin";
+// Cookie 名与 edge 版共用一处定义，避免两边写歪导致「中间件读不到会话」
+export { ADMIN_COOKIE } from "./edge";
+import { ADMIN_COOKIE as COOKIE_NAME } from "./edge";
 
 authenticator.options = { window: 1 }; // 允许 ±30s 时钟漂移
 
@@ -72,7 +74,7 @@ export async function verifySessionToken(token: string): Promise<AdminSession | 
 
 /** 从请求 Cookie 读取并校验后台会话，返回用户名或 null。 */
 export async function getSession(req: NextRequest): Promise<string | null> {
-  const token = req.cookies.get(ADMIN_COOKIE)?.value;
+  const token = req.cookies.get(COOKIE_NAME)?.value;
   if (!token) return null;
   const s = await verifySessionToken(token);
   return s ? s.user : null;
@@ -81,7 +83,7 @@ export async function getSession(req: NextRequest): Promise<string | null> {
 /** 服务端组件（如后台布局）读取会话，返回用户名或 null。 */
 export async function getServerSession(): Promise<string | null> {
   const store = await cookies();
-  const token = store.get(ADMIN_COOKIE)?.value;
+  const token = store.get(COOKIE_NAME)?.value;
   if (!token) return null;
   const s = await verifySessionToken(token);
   return s ? s.user : null;

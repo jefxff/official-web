@@ -44,6 +44,9 @@ docker run -d --name fmw-web -p 3000:3000 --env-file .env.production fmw-web:<ta
 - **回滚**：`docker run` 上一个 tag 即可，数据库变更只做向前兼容（新增列可空、不删列），保证旧镜像仍能运行。
 - **缓存**：发布后由 `@fmw/publish` 自动按 URL 失效；若发现旧页面残留，用 `CF_ZONE_ID` / `CF_API_TOKEN` 手工 Purge 对应 URL，不要整站 Purge（会打穿回源）。
 - **验证**：发布后立即跑拨测（见 §5），失败则回滚，不要在线调试。
+- **AUTH_SECRET 必须构建期注入**：`middleware.ts` 跑在 Edge Runtime，其中 `process.env.AUTH_SECRET`
+  在**构建时被内联**。只在容器运行期改环境变量不会生效，还会造成「中间件认为未登录、Node 侧认为已登录」
+  ——表现为登录成功后立刻被踢回登录页。**轮换密钥 = 重新构建镜像**，并让新老会话自然过期（8h）。
 
 ## 3. PostgreSQL
 

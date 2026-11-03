@@ -8,6 +8,7 @@ import {
 } from "@fmw/ai";
 import { captureException, logger } from "@fmw/observability";
 import { isSentenceBoundary } from "@fmw/ai/sentence";
+import { clientIp, rateLimited } from "@fmw/ratelimit";
 import { appendTurn, resolveConversation } from "@fmw/ai/persistence";
 import type { Locale } from "@/i18n/routing";
 
@@ -31,28 +32,9 @@ const bodySchema = z.object({
     .optional(),
 });
 
-// 简单内存限流（单实例）。多实例部署需外部存储（Redis / Cloudflare KV）。
-const RATE = new Map<string, { count: number; resetAt: number }>();
+// 限流实现已抽到 @fmw/ratelimit（联系表单接口复用同一套计数）。
 const RATE_LIMIT = 20;
 const RATE_WINDOW_MS = 60_000;
-
-function rateLimited(ip: string): boolean {
-  const now = Date.now();
-  const rec = RATE.get(ip);
-  if (!rec || rec.resetAt < now) {
-    RATE.set(ip, { count: 1, resetAt: now + RATE_WINDOW_MS });
-    return false;
-  }
-  if (rec.count >= RATE_LIMIT) return true;
-  rec.count += 1;
-  return false;
-}
-
-function clientIp(req: NextRequest): string {
-  const fwd = req.headers.get("x-forwarded-for");
-  if (fwd) return fwd.split(",")[0].trim();
-  return req.headers.get("x-real-ip") ?? "unknown";
-}
 
 const encoder = new TextEncoder();
 function sse(data: unknown): Uint8Array {
@@ -84,7 +66,7 @@ export async function POST(req: NextRequest) {
   }
   const { message, locale = "zh", history = [], conversationId, clientId } = parsed.data;
 
-  if (rateLimited(clientIp(req))) {
+  if (rateLimited(`ai:${clientIp(req)}`, RATE_LIMIT, RATE_WINDOW_MS)) {
     return new Response(JSON.stringify({ error: "rate_limited" }), {
       status: 429,
     });

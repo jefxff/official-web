@@ -24,6 +24,10 @@ interface Target {
   contentType?: string;
   /** JSON 校验：解析后自定义断言 */
   json?: (body: unknown) => boolean;
+  /** 期望的状态码（不写则要求 200）。用于断言「未登录必须跳登录」这类行为。 */
+  expectStatus?: number;
+  /** 响应体绝不能出现的片段（用于断言密钥/内部信息没有被吐出来） */
+  mustNotContain?: string;
 }
 
 const TIMEOUT_MS = 10_000;
@@ -46,6 +50,19 @@ const TARGETS: Target[] = [
     label: "P02 未知料号应 404",
     contentType: "application/json",
     // 404 是正确行为：单独标记，见下方 expectStatus
+  },
+  {
+    path: "/admin",
+    label: "后台未登录必须跳登录",
+    expectStatus: 307,
+    mustNotContain: "验证证据",
+  },
+  {
+    path: "/admin/setup",
+    label: "TOTP 设置页未登录必须跳登录",
+    expectStatus: 307,
+    // 该页会渲染 otpauth://...?secret=XXX —— 未登录时绝不能让密钥出现在响应里
+    mustNotContain: "secret=",
   },
   { path: "/sitemap.xml", label: "sitemap", mustContain: "<urlset", contentType: "application/xml" },
   { path: "/robots.txt", label: "robots", mustContain: "Sitemap", contentType: "text/plain" },
@@ -100,6 +117,7 @@ async function probeOne(
   };
 
   const expect404 = target.path.includes("NO-SUCH-MPN");
+  const expectStatus = target.expectStatus ?? 200;
 
   try {
     const res = await fetch(url, {
@@ -116,8 +134,20 @@ async function probeOne(
       return result;
     }
 
-    if (res.status !== 200) {
-      result.problem = `HTTP ${res.status}`;
+    if (res.status !== expectStatus) {
+      result.problem = `期望 HTTP ${expectStatus}，实际 ${res.status}`;
+      return result;
+    }
+
+    // 重定向类断言只看状态码与响应体（不回读 Location 的语义）
+    if (expectStatus >= 300 && expectStatus < 400) {
+      const body = await res.text();
+      if (target.mustNotContain && body.includes(target.mustNotContain)) {
+        result.problem = `响应体泄露敏感片段「${target.mustNotContain}」`;
+        return result;
+      }
+      result.ok = true;
+      if (result.ms > SLOW_MS) result.problem = `响应偏慢 ${result.ms}ms`;
       return result;
     }
 
@@ -130,6 +160,11 @@ async function probeOne(
     const body = await res.text();
     if (body.length === 0) {
       result.problem = "响应体为空";
+      return result;
+    }
+
+    if (target.mustNotContain && body.includes(target.mustNotContain)) {
+      result.problem = `响应体泄露敏感片段「${target.mustNotContain}」`;
       return result;
     }
 

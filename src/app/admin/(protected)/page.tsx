@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { getArticles, getProducts } from "@fmw/data";
+import { verificationLabel } from "../labels";
 
 export const dynamic = "force-dynamic";
 
@@ -16,14 +17,14 @@ export default async function AdminDashboard() {
           <h1 className="text-xl font-semibold">料号（{products.length}）</h1>
           <Link
             href="/admin/products/new"
-            className="rounded-lg bg-[var(--color-brand)] text-white px-4 py-2 text-sm font-medium hover:opacity-90"
+            className="rounded-[2px] bg-[var(--color-brand)] text-[var(--color-on-brand)] px-4 py-2 text-sm font-medium hover:opacity-90"
           >
             新建料号
           </Link>
         </div>
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-[var(--color-surface)] rounded-[2px] shadow-none overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-slate-100 text-slate-600">
+            <thead className="bg-[var(--color-surface-2)] text-[var(--color-muted)]">
               <tr>
                 <th className="text-left px-4 py-2">料号</th>
                 <th className="text-left px-4 py-2">名称</th>
@@ -38,7 +39,7 @@ export default async function AdminDashboard() {
                   <td className="px-4 py-2 font-mono">{p.mpn}</td>
                   <td className="px-4 py-2">{p.name}</td>
                   <td className="px-4 py-2">{p.category}</td>
-                  <td className="px-4 py-2">{p.verificationLevel}</td>
+                  <td className="px-4 py-2">{verificationLabel(p.verificationLevel)}</td>
                   <td className="px-4 py-2">
                     <Link
                       href={`/admin/products/${p.mpn}/edit`}
@@ -59,14 +60,14 @@ export default async function AdminDashboard() {
           <h1 className="text-xl font-semibold">资讯（{articles.length}）</h1>
           <Link
             href="/admin/articles/new"
-            className="rounded-lg bg-[var(--color-brand)] text-white px-4 py-2 text-sm font-medium hover:opacity-90"
+            className="rounded-[2px] bg-[var(--color-brand)] text-[var(--color-on-brand)] px-4 py-2 text-sm font-medium hover:opacity-90"
           >
             新建资讯
           </Link>
         </div>
-        <div className="bg-white rounded-lg shadow overflow-hidden">
+        <div className="bg-[var(--color-surface)] rounded-[2px] shadow-none overflow-hidden">
           <table className="w-full text-sm">
-            <thead className="bg-slate-100 text-slate-600">
+            <thead className="bg-[var(--color-surface-2)] text-[var(--color-muted)]">
               <tr>
                 <th className="text-left px-4 py-2">标题</th>
                 <th className="text-left px-4 py-2">Slug</th>

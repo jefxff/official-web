@@ -31,48 +31,68 @@ export default function AdminLoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-100">
+    <div className="grain relative flex min-h-screen items-center justify-center bg-[var(--color-bg)] px-5">
       <form
         onSubmit={submit}
-        className="w-96 bg-white p-8 rounded-xl shadow space-y-4"
+        className="relative z-10 w-full max-w-[380px] border border-[var(--color-line)] bg-[var(--color-surface)] p-8"
       >
-        <h1 className="text-xl font-semibold">富满微官网 · 后台登录</h1>
-        <p className="text-xs text-slate-500">
-          用户名/密码 + TOTP 动态码（双重校验）
+        <div className="label mb-6">FMW / Admin</div>
+        <h1 className="text-[20px] font-bold tracking-[-0.01em] text-[var(--color-bone)]">
+          富满微官网 · 后台
+        </h1>
+        <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--color-muted)]">
+          用户名 / 密码 + TOTP 动态码（双重校验）
         </p>
-        <div>
-          <label className="block text-sm text-slate-600">用户名</label>
-          <input
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            className="mt-1 w-full border rounded px-3 py-2 text-sm"
-          />
+
+        <div className="mt-7 space-y-4">
+          <div>
+            <label className="label mb-2 block" htmlFor="admin-username">
+              用户名
+            </label>
+            <input
+              id="admin-username"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="input"
+            />
+          </div>
+          <div>
+            <label className="label mb-2 block" htmlFor="admin-password">
+              密码
+            </label>
+            <input
+              id="admin-password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="input"
+            />
+          </div>
+          <div>
+            <label className="label mb-2 block" htmlFor="admin-totp">
+              动态验证码（TOTP）
+            </label>
+            <input
+              id="admin-totp"
+              value={totp}
+              onChange={(e) => setTotp(e.target.value)}
+              placeholder="6 位动态码"
+              inputMode="numeric"
+              className="input mono tracking-[0.3em]"
+            />
+          </div>
         </div>
-        <div>
-          <label className="block text-sm text-slate-600">密码</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className="mt-1 w-full border rounded px-3 py-2 text-sm"
-          />
-        </div>
-        <div>
-          <label className="block text-sm text-slate-600">
-            动态验证码（TOTP）
-          </label>
-          <input
-            value={totp}
-            onChange={(e) => setTotp(e.target.value)}
-            placeholder="6 位动态码"
-            className="mt-1 w-full border rounded px-3 py-2 text-sm tracking-widest"
-          />
-        </div>
-        {error && <p className="text-sm text-red-600">{error}</p>}
+
+        {error && (
+          <p role="alert" className="mt-4 border-l-2 border-[var(--color-amber)] px-3 py-1.5 text-[12.5px] text-[var(--color-bone-2)]">
+            {error}
+          </p>
+        )}
+
         <button
           type="submit"
           disabled={loading}
-          className="w-full rounded-lg bg-[var(--color-brand)] text-white py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+          className="btn btn-primary mt-6 w-full"
         >
           {loading ? "登录中…" : "登录"}
         </button>

@@ -58,7 +58,7 @@ export default function MediaUploadField({
 
   return (
     <div className="block">
-      <span className="block text-sm text-slate-600 mb-1">{label}</span>
+      <span className="block text-sm text-[var(--color-muted)] mb-1">{label}</span>
       <div className="flex gap-2">
         <input
           value={value}
@@ -70,7 +70,7 @@ export default function MediaUploadField({
           type="button"
           onClick={() => inputRef.current?.click()}
           disabled={busy}
-          className="rounded-lg border border-slate-300 px-3 text-sm text-slate-700 hover:bg-slate-50 disabled:opacity-50 whitespace-nowrap"
+          className="rounded-[2px] border border-[var(--color-line)] px-3 text-sm text-[var(--color-bone-2)] hover:bg-[var(--color-bg)] disabled:opacity-50 whitespace-nowrap"
         >
           {busy ? "上传中…" : "上传"}
         </button>
@@ -78,7 +78,7 @@ export default function MediaUploadField({
           <button
             type="button"
             onClick={() => onChange("")}
-            className="rounded-lg border border-slate-300 px-3 text-sm text-slate-500 hover:bg-slate-50"
+            className="rounded-[2px] border border-[var(--color-line)] px-3 text-sm text-[var(--color-muted)] hover:bg-[var(--color-bg)]"
           >
             清除
           </button>
@@ -94,15 +94,15 @@ export default function MediaUploadField({
           if (f) void upload(f);
         }}
       />
-      {hint && <span className="block text-xs text-slate-400 mt-1">{hint}</span>}
-      {error && <span className="block text-xs text-red-600 mt-1">{error}</span>}
+      {hint && <span className="block text-xs text-[var(--color-muted)] mt-1">{hint}</span>}
+      {error && <span className="block text-xs text-[var(--color-amber-2)] mt-1">{error}</span>}
       {value && isImage && (
         // 预览用原生 img：上传源是自有域名，无需 Next Image 优化，也避免后台额外配置 remotePatterns。
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={value}
           alt="封面预览"
-          className="mt-2 h-24 rounded border border-slate-200 object-cover"
+          className="mt-2 h-24 rounded border border-[var(--color-line)] object-cover"
         />
       )}
     </div>

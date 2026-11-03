@@ -7,7 +7,7 @@ export default async function NewProductPage() {
   const series = await getSeriesList("zh");
   return (
     <ProductForm
-      seriesOptions={series.map((s) => ({ slug: s.slug, name: s.name }))}
+      seriesOptions={series.map((s) => ({ id: s.id, name: s.name }))}
     />
   );
 }

@@ -1,0 +1,76 @@
+%PDF-1.4
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Count 1 /Kids [4 0 R] >>
+endobj
+3 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>
+endobj
+4 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 595 842] /Resources << /Font << /F1 3 0 R >> >> /Contents 5 0 R >>
+endobj
+5 0 obj
+<< /Length 968 >>
+stream
+BT
+/F1 11 Tf
+60 780 Td
+16 TL
+/F1 18 Tf
+(FM8001 - Preliminary Datasheet) Tj T*
+/F1 11 Tf
+() Tj T*
+/F1 11 Tf
+(FM8001 500mA Ultra-Low-Noise LDO) Tj T*
+/F1 11 Tf
+() Tj T*
+/F1 11 Tf
+(Description) Tj T*
+/F1 11 Tf
+(  This document is a demo artifact generated for the website preview.) Tj T*
+/F1 11 Tf
+(  It contains no production electrical data. Do not use for design.) Tj T*
+/F1 11 Tf
+() Tj T*
+/F1 11 Tf
+(Key specifications \(demo values\)) Tj T*
+/F1 11 Tf
+(  Input Voltage         2.2V - 5.5V) Tj T*
+/F1 11 Tf
+(  Output Current        500mA) Tj T*
+/F1 11 Tf
+(  Dropout               120mV @ 500mA) Tj T*
+/F1 11 Tf
+(  Output Noise          17uVRMS) Tj T*
+/F1 11 Tf
+(  PSRR                  65dB @ 1kHz) Tj T*
+/F1 11 Tf
+() Tj T*
+/F1 11 Tf
+(Package / ordering information) Tj T*
+/F1 11 Tf
+(  See the product page on the website for the ordering table.) Tj T*
+/F1 11 Tf
+() Tj T*
+/F1 11 Tf
+(Notice) Tj T*
+/F1 11 Tf
+(  Sample document for demonstration purposes only.) Tj T*
+ET
+endstream
+endobj
+xref
+0 6
+0000000000 65535 f 
+0000000009 00000 n 
+0000000058 00000 n 
+0000000115 00000 n 
+0000000185 00000 n 
+0000000311 00000 n 
+trailer
+<< /Size 6 /Root 1 0 R >>
+startxref
+1330
+%%EOF

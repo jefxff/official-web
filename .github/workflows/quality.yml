@@ -41,6 +41,9 @@ jobs:
       - name: Observability (APM envelope) test
         run: npm run test:observability
 
+      - name: Inquiry persistence & rate limit test
+        run: npm run test:contact
+
       - name: Dependency security gate
         run: npm run audit
 

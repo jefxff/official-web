@@ -38,7 +38,7 @@ export default async function EditProductPage({
     <ProductForm
       isEdit
       initial={initial}
-      seriesOptions={series.map((s) => ({ slug: s.slug, name: s.name }))}
+      seriesOptions={series.map((s) => ({ id: s.id, name: s.name }))}
     />
   );
 }

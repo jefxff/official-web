@@ -17,7 +17,7 @@ export function inputClass(hasError?: boolean): string {
 
 export function FieldMessage({ message }: { message?: string }) {
   if (!message) return null;
-  return <span className="mt-1 block text-xs text-red-600">{message}</span>;
+  return <span className="mt-1 block text-xs text-[var(--color-amber-2)]">{message}</span>;
 }
 
 export function I18nWarning({
@@ -33,7 +33,7 @@ export function I18nWarning({
 }) {
   if (issues.length === 0) return null;
   return (
-    <div className="rounded-lg border border-amber-300 bg-amber-50 p-4">
+    <div className="rounded-[2px] border border-amber-300 bg-amber-50 p-4">
       <p className="text-sm font-medium text-amber-900">
         检测到 {issues.length} 处中英文内容问题（可确认后继续保存）
       </p>
@@ -47,14 +47,14 @@ export function I18nWarning({
           type="button"
           onClick={onIgnore}
           disabled={busy}
-          className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white hover:bg-amber-700 disabled:opacity-50"
+          className="rounded-[2px] bg-amber-600 px-4 py-2 text-sm font-medium text-[var(--color-on-brand)] hover:bg-amber-700 disabled:opacity-50"
         >
           确认无误，继续保存
         </button>
         <button
           type="button"
           onClick={onCancel}
-          className="rounded-lg px-4 py-2 text-sm text-amber-800 hover:underline"
+          className="rounded-[2px] px-4 py-2 text-sm text-amber-800 hover:underline"
         >
           返回修改
         </button>

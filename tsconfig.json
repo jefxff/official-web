@@ -31,7 +31,9 @@
       "@fmw/i18n-validate": ["./src/packages/i18n-validate"],
       "@fmw/ai": ["./src/packages/ai"],
       "@fmw/ai/*": ["./src/packages/ai/*"],
-      "@fmw/observability": ["./src/packages/observability"]
+      "@fmw/observability": ["./src/packages/observability"],
+      "@fmw/ratelimit": ["./src/packages/ratelimit"],
+      "@fmw/inquiry": ["./src/packages/inquiry"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

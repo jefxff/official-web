@@ -49,7 +49,24 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale === "zh" ? "zh-CN" : "en"}>
-      <body className="min-h-screen flex flex-col">
+      <head>
+        {/* 字体预加载：自托管字体是首屏 LCP 的关键路径，不预载会出现一次字重跳变 */}
+        <link
+          rel="preload"
+          href="/fonts/archivo-latin-var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+        <link
+          rel="preload"
+          href="/fonts/jetbrains-mono-latin-var.woff2"
+          as="font"
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
+      </head>
+      <body className="min-h-screen flex flex-col grain">
         <NextIntlClientProvider messages={messages}>
           <Header />
           <main className="flex-1">{children}</main>

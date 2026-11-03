@@ -1,5 +1,17 @@
 [
   {
+    "id": "a-fm9003-sampling",
+    "slug": "fm9003-sampling",
+    "titleZh": "FM9003 充电升压二合一 PMIC 开放样片申请",
+    "titleEn": "FM9003 Charger + Boost PMIC Now Sampling",
+    "excerptZh": "单颗芯片集成 1A 线性充电与 5V/1A 同步升压，外围仅需 6 个元件。",
+    "excerptEn": "A single die combining a 1A linear charger and 5V/1A synchronous boost, with only six external components.",
+    "bodyZh": "## 一颗芯片解决充电与升压\n\n针对 TWS 充电仓、便携小家电这类「小电池 + 需要 5V 输出」的场景，FM9003 把 **1A 线性充电** 与 **5V/1A 同步升压** 集成到同一颗 QFN-16 封装内。\n\n## 关键指标\n\n- 充电电流 1A，可通过电阻编程，CV 精度 ±1%\n- 升压输出 5V/1A，峰值效率 93.5%\n- 静态电流 18μA，待机不掏空电池\n- 外围仅需 6 个元件，BOM 面积较分立方案减少约 40%\n\n## 评估板\n\nFM9003 EVB 现已可申请，包含原理图、BOM 与实测波形。样片与评估板可通过「联系我们」提交需求。\n\n详见 [FM9003 料号页](/zh/products/FM9003)。",
+    "bodyEn": "## Charging and boosting in one die\n\nFor TWS charging cases and portable appliances that pair a small cell with a 5V rail, the FM9003 combines a **1A linear charger** and a **5V/1A synchronous boost** in a single QFN-16 package.\n\n## Key metrics\n\n- 1A programmable charge current, ±1% CV accuracy\n- 5V/1A boost output, 93.5% peak efficiency\n- 18μA quiescent current keeps standby drain low\n- Six external components; about 40% smaller BOM area than a discrete solution\n\n## Evaluation board\n\nThe FM9003 EVB is available with schematics, BOM and measured waveforms. Request samples through Contact.\n\nSee the [FM9003 part page](/en/products/FM9003).",
+    "coverImage": "/images/news/fm9003-sampling.jpg",
+    "publishedAt": "2026-10-08T09:00:00.000Z"
+  },
+  {
     "id": "a-001",
     "slug": "fm8001-launch",
     "titleZh": "富满微发布 FM8001 超低噪声 LDO",
@@ -8,7 +20,7 @@
     "excerptEn": "A 17μVRMS low-noise regulator for high-precision sensors and RF front-ends enters mass production.",
     "bodyZh": "## 产品定位\n\n富满微今日宣布 **FM8001** 超低噪声 LDO 正式量产。该器件在 1kHz 处提供 65dB 电源抑制比，输出噪声低至 17μVRMS，可显著降低对电源纹波敏感的模拟前端的本底噪声。\n\n## 关键特性\n\n- 输入电压 2.2V – 5.5V，输出电流 500mA\n- 1kHz 处 PSRR 达 65dB，输出噪声 17μVRMS\n- 固定输出电压版本覆盖 1.2V / 1.8V / 2.8V / 3.3V\n- 采用 DFN-4 封装，适合高密度布板\n\n## 典型应用\n\n主要面向高精度传感器、射频前端与音频编解码供电。对噪声敏感的 ADC 参考电压链路，建议在输出端并联 10μF 陶瓷电容以进一步压低高频噪声。\n\n> 样品现已开放申请，可通过「联系我们」提交需求。\n\n详见 [FM8001 数据手册](/zh/products/FM8001)。",
     "bodyEn": "## Positioning\n\nFMW today announced mass production of the **FM8001** ultra-low-noise LDO. Offering 65dB PSRR at 1kHz and 17μVRMS output noise, it reduces baseline noise in ripple-sensitive analog front-ends.\n\n## Key features\n\n- Input voltage 2.2V – 5.5V, output current 500mA\n- 65dB PSRR at 1kHz, 17μVRMS output noise\n- Fixed-output options: 1.2V / 1.8V / 2.8V / 3.3V\n- DFN-4 package, suitable for dense layouts\n\n## Typical applications\n\nTargeted at high-precision sensors, RF front-ends and audio codec supplies. For noise-sensitive ADC reference rails, add a 10μF ceramic capacitor at the output to further suppress high-frequency noise.\n\n> Samples are now available — submit a request via Contact.\n\nSee the [FM8001 datasheet](/en/products/FM8001).",
-    "coverImage": "https://cdn.fmw.example/news/fm8001.jpg",
+    "coverImage": "/images/news/fm8001-launch.jpg",
     "publishedAt": "2026-09-15T09:00:00.000Z"
   },
   {
@@ -20,7 +32,7 @@
     "excerptEn": "The 30V/60A N-ch MOSFET is automotive-qualified and enters the vehicle supply chain.",
     "bodyZh": "## 认证结论\n\n经第三方实验室全温区验证，**FM3001** 在 -40°C 至 175°C 结温范围内保持稳定的 Rds(on) 与击穿电压，正式获得 **AEC-Q101** 认证。\n\n## 验证要点\n\n- 全温区 Rds(on) 漂移小于 8%\n- 1000 次温度循环后参数无退化\n- 通过 HBM 2kV 静电放电测试\n\n认证报告编号见料号页的「验证证据」字段，可用于车载项目的准入审查。",
     "bodyEn": "## Certification result\n\nThird-party full-temperature-range validation confirms that the **FM3001** maintains stable Rds(on) and breakdown voltage from -40°C to 175°C junction temperature. It is now **AEC-Q101** certified.\n\n## Validation highlights\n\n- Rds(on) drift below 8% across the full temperature range\n- No parameter degradation after 1,000 thermal cycles\n- Passed HBM 2kV ESD testing\n\nThe report reference is listed in the \"verification evidence\" field on the part page for automotive qualification review.",
-    "coverImage": "https://cdn.fmw.example/news/fm3001.jpg",
+    "coverImage": "/images/news/automotive-aecq101.jpg",
     "publishedAt": "2026-08-20T09:00:00.000Z"
   },
   {
@@ -32,7 +44,19 @@
     "excerptEn": "From storage BMS to PV optimizers, low-loss MOSFETs and PMICs drive the green transition.",
     "bodyZh": "## 方案概述\n\n面向便携储能与快充适配器，富满微提供从 **同步整流** 到 **协议识别** 的完整器件组合，帮助客户缩短认证周期。\n\n## 推荐组合\n\n1. 同步整流控制器：降低次级侧损耗\n2. 快充协议 IC：支持 PD / QC 多协议\n3. 低静态电流 LDO：为 MCU 与采样电路供电\n\n选型时可参考各料号页的分级验证等级：**CERTIFIED** 表示已取得第三方认证，**BENCH_TESTED** 表示已完成内部实测。",
     "bodyEn": "## Solution overview\n\nFor portable energy storage and fast-charging adapters, FMW offers a complete device set from **synchronous rectification** to **protocol identification**, shortening certification cycles.\n\n## Recommended combination\n\n1. Synchronous rectification controller: lowers secondary-side losses\n2. Fast-charging protocol IC: supports PD / QC\n3. Low-quiescent-current LDO: powers the MCU and sensing circuits\n\nWhen selecting parts, check the verification level on each part page: **CERTIFIED** means third-party certified, **BENCH_TESTED** means internally bench-verified.",
-    "coverImage": "https://cdn.fmw.example/news/green.jpg",
+    "coverImage": "/images/news/green-energy-power.jpg",
     "publishedAt": "2026-07-10T09:00:00.000Z"
+  },
+  {
+    "id": "a-quality-lab",
+    "slug": "reliability-lab",
+    "titleZh": "可靠性实验室完成新一轮设备扩容",
+    "titleEn": "Reliability Lab Completes Equipment Expansion",
+    "excerptZh": "新增高低温循环箱与功率器件动态测试台，覆盖 −55°C 至 175°C 全温区验证。",
+    "excerptEn": "New thermal cycling chambers and a dynamic power-device test bench extend coverage from -55°C to 175°C.",
+    "bodyZh": "## 扩容内容\n\n为支撑车规与工业级产品的验证需求，可靠性实验室本轮新增：\n\n1. 三台高低温循环箱，温区扩展至 **−55°C ~ 175°C**\n2. 功率器件动态测试台，支持双脉冲与短路耐受测试\n3. 在线参数漂移监测系统，循环过程中自动记录 Rds(on) 与 Vth\n\n## 对客户的意义\n\n此前车规项目的全温区验证需外送第三方实验室，周期约 6 周；扩容后内部可完成大部分项目，样片验证周期缩短至 2 周以内。认证类报告仍需第三方出具。\n\n具体的验证等级说明见各料号页的「验证证据」字段。",
+    "bodyEn": "## What was added\n\nTo support automotive and industrial qualification, the reliability lab added:\n\n1. Three thermal cycling chambers, extending range to **-55°C to 175°C**\n2. A dynamic power-device bench supporting double-pulse and short-circuit withstand tests\n3. In-line parameter drift monitoring that logs Rds(on) and Vth during cycling\n\n## What it means for customers\n\nFull-temperature validation for automotive projects previously took about six weeks at an external lab. Most projects can now be run in-house, cutting sample validation to under two weeks. Certification reports are still issued by third parties.\n\nSee the \"verification evidence\" field on each part page for the verification level definitions.",
+    "coverImage": "/images/news/reliability-lab.jpg",
+    "publishedAt": "2026-06-18T09:00:00.000Z"
   }
 ]

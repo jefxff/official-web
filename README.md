@@ -4,6 +4,50 @@
 
 > 当前状态：**S0–S5 主体 + 内容运营与运维能力（媒体上传 / CSP / 双语校验 / APM / 拨测）**。已跑通 `dev` / `build` / 生产回归；核心页面、SEO、数据层、双区域构建、缓存失效、后台认证与写接口、发布管线（缓存失效 + 搜索重建）、海外 Worker 回源、AI 助手（槽位填充 + SSE + 会话留存）、媒体上传（本地 / S3 兼容）、分层 CSP、可观测性与双区域拨测均已就位。剩余为**基础设施侧动作**（PG 多可用区 + WAL 归档 + PITR 开通、对象存储版本化、监控告警接线），步骤见 [`docs/ops-runbook.md`](docs/ops-runbook.md)。
 
+## 视觉系统（v2「亮场」）
+
+第一版是 Tailwind 默认风格（蓝底白卡、圆角 + 微阴影、三张同款特性卡）；
+第二版改成整站暗色 + 琥珀，方向没错但语汇不对 —— 全暗的页面读起来像开发者工具，
+而且中文小字在暗底上更费眼。国内做得好的硬件 / 半导体官网（华为、大疆、兆易、纳芯微）
+基本都走亮场：白纸底、深墨字、一个大色块负责节奏、产品本身有「实物感」。
+
+v2 据此重做：
+
+| 维度 | 决策 | 理由 |
+|---|---|---|
+| 底色 | 纸白 `#FAF9F6`，卡片纯白，深色段 `#101216` | 亮场为主，用「浅 — 深 — 品牌色」三段换气，翻长页不累 |
+| 文字 | 墨黑 `#14161A` / 次级 `#3D434C` / 弱化 `#767C86` | 白底上正文对比度 15:1，远高于 4.5:1 下限 |
+| 强调 | 单一朱砂 `#C8442B` | 只给关键动作、关键数字与激活态；红底白字 4.9:1 |
+| 字体 | Archivo（拉丁展示）+ JetBrains Mono（料号 / 参数）+ 系统中文重黑体 | 两者**自托管**在 `public/fonts`，不走 Google Fonts：国内不可达，且与「先不上 CDN」冲突 |
+| 结构 | 发丝线 + 2px 方角，不用胶囊与大圆角 | 阴影与胶囊是最典型的「AI 味」信号 |
+| 产品视觉 | `ChipPackage`：纯 SVG 的 QFN 顶视（塑封体渐变 / 金属引脚 / 激光打标 / 一号脚朱砂点 / 棚拍投影） | 换料号不用重拍照片，也不依赖任何图片资源 |
+| 骨架 | 产品一律用**规格表行**而非卡片 | 客户真的在竖着扫料号比参数，卡片会打断这个动作 |
+
+页面节奏（首页）：首屏（纸白）→ 能力带 → 产品系列（纯白）→ 重点产品（纸白）
+→ 优势与非对称的验证等级阶梯（墨黑）→ 资讯（纯白）→ 行动区（整幅朱砂）→ 页脚（墨黑）。
+
+配套改动：
+
+- `src/app/globals.css` 重写为令牌层 + 组件层；另有 `.on-ink` / `.on-brand` 两个**作用域**，
+  只重定义颜色变量，段内所有 `var(--color-*)` 自动跟随，不必为深色段单独写一套类。
+- 首屏入场是一次编排好的六段错峰序列（`.enter-1…6`）；滚动进场用 `animation-timeline: view()`，
+  浏览器不支持时内容照常可见（绝不停在 `opacity: 0`）。全部动效在 `prefers-reduced-motion: reduce` 下关闭。
+- 资讯封面改为**无文字的制图版**（栅格 + 朱砂同心环 + 芯片剪影 + 尺寸标注 + 期号）：
+  一套素材同时服务中英两站，把中文标题烙进图片会让另一站露错语言。
+- 产品详情、系列页、系列详情各自带一块「封装示意」展台，页面不再是纯文字表格。
+- 后台同步换肤（同一套令牌），修正了品牌色底上白字对比度不足的问题。
+
+视觉回归截图：
+
+```bash
+npm run build && npx next start -p 3210   # 另开一个终端
+npm run shots -- http://127.0.0.1:3210 docs/screens
+```
+
+脚本用系统自带 Edge（`playwright-core` 不自带浏览器，避免再拉 100MB+），
+桌面 1440×900 + 移动 390×844，`reducedMotion: reduce` 关闭动效以保证两次截图可比。
+当前一轮成品见 `docs/screens/`。
+
 ## 技术栈
 
 - **框架**：Next.js 15.5（App Router, RSC, ISR/SSG）
@@ -86,17 +130,48 @@ npm run build        # 生产构建（默认 cn 目标）
 npm run start        # 启动生产服务
 npm run typecheck    # 类型检查
 npm run lint         # ESLint（CLI 模式，覆盖全仓库）
-npm test             # 四组行为回归测试（schema / storage / content / observability）
+npm test             # 五组行为回归测试（schema / storage / content / observability / contact）
 npm run test:schema  # schema 行为回归测试（zod 校验语义）
 npm run test:storage # 媒体存储 + SigV4（官方 test vector）
 npm run test:content # Markdown 渲染安全边界 + 双语字段校验
 npm run test:observability # APM 上报链路
+npm run test:contact # 询盘落盘 + 限流窗口
 npm run probe        # 双区域拨测（PROBE_CN / PROBE_GLOBAL 或 --cn= / --global=）
 npm run prune:ai -- 90     # 清理 90 天未活跃的 AI 会话
 npm run audit        # 依赖安全门禁（分级：high 阻断 / moderate 须登记）
 npm run prisma:generate   # 生成 Prisma client
 npm run seed         # 向 PG 灌入 seed 数据（需 DATABASE_URL）
 ```
+
+## 本地运行（国内单区域，无 CDN）
+
+当前形态刻意**不依赖任何 CDN / 边缘节点**：静态资源与页面全部由国内单一源站直出，
+测试数据来自仓库内的 JSON（`DATA_SOURCE=seed`），不需要 PostgreSQL 也能跑通全站。
+
+```bash
+npm install
+cp .env.example .env.local     # 至少填 ADMIN_PASSWORD / ADMIN_TOTP_SECRET
+npm run build && npm start     # http://localhost:3000
+```
+
+`.env.local` 最小可运行内容：
+
+```ini
+DATA_SOURCE=seed
+BUILD_TARGET=cn
+NEXT_PUBLIC_SITE_URL=http://127.0.0.1:3000
+ADMIN_USERNAME=admin
+ADMIN_PASSWORD=<自定义>
+ADMIN_TOTP_SECRET=<base32，缺失则该环境不校验动态码>
+AUTH_SECRET=<随机串，生产必须换>
+```
+
+几点须知：
+
+- **seed 模式下后台写接口返回 503**（`admin_write_requires_db`）——写操作必须走真实 PG，这是设计上的硬约束，不是故障。后台页面本身可正常浏览。
+- **联系表单在 seed 模式下把询盘写入 `.data/inquiries.jsonl`**（已 gitignore）；接 PG 后自动改写入 `Inquiry` 表。两条通道都失败会返回 500，不会假装成功。
+- **演示静态资源**（新闻封面、数据手册 PDF）由 `python scripts/gen-demo-assets.py` 生成到 `public/`。它们是演示文案，不是真实产品资料，替换真实资料后无需再跑该脚本。
+- 想让 TOTP 动态码生效，`ADMIN_TOTP_SECRET` 必须是合法 base32；登录后可在 `/admin/setup` 扫码绑定。
 
 ## 依赖安全门禁
 
@@ -199,9 +274,17 @@ CSP 由 `middleware.ts` 逐请求下发，按路由分两档（完整取舍理�
 - **`npm audit` 分级门禁**：单一 `--audit-level=high` 阈值在多次误报后容易被团队习惯性绕过，现改为三级门禁（见上）。
 - **Docker 镜像缺 `server.js`（已修复）**：Dockerfile 复制 `.next/standalone`，但 `next.config.ts` 原先未开 `output: "standalone"`，该目录根本不会生成——镜像能构建成功、启动即失败。现已在配置中开启，并在镜像内预建 `MEDIA_ROOT`（`/app/.media`）并授权，避免编辑上传 EACCES。
 - **资讯正文「支持 Markdown」但实际不渲染（已修复）**：前台原先直接输出 `{article.body}`，编辑写的 `##`、列表、链接全成符号。现由 `@fmw/markdown` 渲染；该渲染器不解析原始 HTML，因此**不能**再依赖「正文里写 HTML」实现排版。
+- **后台守卫形同虚设：未登录可读到后台数据与 TOTP 密钥（已修复，安全）**：这是本轮最严重的一处。三层原因叠加——
+  1. `/admin/setup` 原在 `app/admin/` 下、不在 `(protected)` 组内，完全无鉴权，**任何人访问都能拿到含 `?secret=` 的 otpauth 二维码**，等于公开二步验证种子；
+  2. 即便移入受保护组，**布局里的 `redirect()` 属于渲染之后**：App Router 并行渲染页面，页面内容仍会被序列化进 307 响应的 RSC payload。实测未登录请求 `/admin` 的 307 响应体里带着完整料号列表，`/admin/setup` 带着 TOTP 种子；
+  3. 因此最终修复把**鉴权前移到 `middleware.ts`**（`/admin/**` 除登录页，JWT 无效即在渲染前 307，响应体为空），并对 `setup` 页做页面级二次校验（纵深防御）。`scripts/probe.ts` 增加断言：`/admin` 与 `/admin/setup` 未登录必须 307，且响应体不得含 `secret=`。教训：**有敏感内容的页面不能只依赖布局守卫**。
+- **后台系列下拉永远是「（无）」且保存会清空系列（已修复）**：表单 option 用的是 `Series.slug`，而数据库 `products.seriesId` 存的是 `Series.id`，回填匹配不上 → 下拉退回「（无）」→ 保存时把 `seriesId` 写成 NULL，料号静默脱离系列。现统一用 `id` 作为 option value。
+- **联系表单是「假成功」（已修复）**：原先 `onSubmit` 只做 `setDone(true)`，客户留言全部丢弃，页面却显示「已收到您的留言」。现接入 `POST /api/v1/contact`（zod 校验 + 蜜罐 + 5 次/10 分钟/IP 限流 + 体积上限），有 PG 写 `Inquiry` 表、无 PG 写 `.data/inquiries.jsonl`，两条通道都失败返回 500。
+- **产品徽标中英混排（已修复）**：`ProductCard` 只翻译了 `BENCH_TESTED`，其余三档硬编码英文，导致中文页出现 `Datasheet` / `Internal` / `Certified`。现四档统一走文案表；后台列表与下拉也改为中文档位显示（提交值仍是枚举）。
+- **seed 数据指向不存在的 CDN 域名（已修复）**：手册与新闻封面原先写死 `cdn.fmw.example`，不开 CDN 时全是死链与裂图。现改为 `public/` 下的本地资源，由 `scripts/gen-demo-assets.py` 生成。
 - **CSP 未做全站 nonce（有意取舍）**：nonce 会强制动态渲染，与双区域边缘缓存冲突。后台用 nonce 严格档，公开页用 `'unsafe-inline'` + 「不渲染用户 HTML」补偿。详见 `docs/security-policy.md`。
 
-**已实现**：S0–S1 全部；S2 后台认证（TOTP）、国内唯一写点（产品/系列/资讯 CRUD 写接口 + 后台 UI）、发布管线（缓存失效 + 搜索重建）、海外 Worker 回源、DB 层分级验证约束、种子脚本；S5 的 P24 AI 助手（槽位填充接地 + 句子级 SSE + 双端 feature flag + Mock/OpenAI Provider + 会话留存/多轮上下文）；**内容运营**（媒体上传 local/S3、Markdown 渲染、双语字段校验、后台逐字段错误定位）；**安全**（分层 CSP、HSTS/COOP 等响应头、后台与写接口 no-store）；**可观测与巡检**（Sentry Envelope 上报、双区域拨测、四组行为回归测试接入 CI）。
+**已实现**：S0–S1 全部；S2 后台认证（TOTP）、国内唯一写点（产品/系列/资讯 CRUD 写接口 + 后台 UI）、发布管线（缓存失效 + 搜索重建）、海外 Worker 回源、DB 层分级验证约束、种子脚本；S5 的 P24 AI 助手（槽位填充接地 + 句子级 SSE + 双端 feature flag + Mock/OpenAI Provider + 会话留存/多轮上下文）；**内容运营**（媒体上传 local/S3、Markdown 渲染、双语字段校验、后台逐字段错误定位）；**安全**（分层 CSP、HSTS/COOP 等响应头、后台与写接口 no-store）；**可观测与巡检**（Sentry Envelope 上报、双区域拨测、五组行为回归测试接入 CI）；**询盘闭环**（联系表单真实落库 + 蜜罐 + 限流）。
 
 **剩余（基础设施侧，非代码）**：PG 多可用区 + WAL 归档 + PITR 开通与恢复演练、对象存储版本控制与生命周期策略、监控告警通道接线（拨测与 Sentry 告警规则）、CDN 侧规则复核（排除 `/admin`、`/api/v1/admin`）。操作步骤见 [`docs/ops-runbook.md`](docs/ops-runbook.md)。
 

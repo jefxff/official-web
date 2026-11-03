@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import { verificationLabel } from "../../labels";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PRODUCT_I18N_PAIRS, collectI18nIssues, type I18nIssue } from "@fmw/i18n-validate";
@@ -38,7 +39,7 @@ export default function ProductForm({
   isEdit,
 }: {
   initial?: Partial<ProductFormValues>;
-  seriesOptions: { slug: string; name: string }[];
+  seriesOptions: { id: string; name: string }[];
   isEdit?: boolean;
 }) {
   const router = useRouter();
@@ -131,7 +132,7 @@ export default function ProductForm({
     v.verificationLevel === "BENCH_TESTED" || v.verificationLevel === "CERTIFIED";
 
   return (
-    <form onSubmit={submit} className="max-w-3xl space-y-5 bg-white p-6 rounded-lg shadow">
+    <form onSubmit={submit} className="max-w-3xl space-y-5 bg-[var(--color-surface)] p-6 rounded-[2px] shadow-none">
       <h1 className="text-xl font-semibold">{isEdit ? "编辑料号" : "新建料号"}</h1>
 
       <div className="grid grid-cols-2 gap-4">
@@ -151,10 +152,12 @@ export default function ProductForm({
           />
         </Field>
         <Field label="系列">
+          {/* value 必须用 Series.id：DB 里 products.seriesId 存的是 id，用 slug 会导致
+              回填匹配不上 → select 退回「（无）」→ 保存时静默清空系列关联。 */}
           <select value={v.seriesId} onChange={(e) => set("seriesId", e.target.value)} className="input">
             <option value="">（无）</option>
             {seriesOptions.map((s) => (
-              <option key={s.slug} value={s.slug}>{s.name}</option>
+              <option key={s.id} value={s.id}>{s.name}</option>
             ))}
           </select>
         </Field>
@@ -165,7 +168,8 @@ export default function ProductForm({
             className="input"
           >
             {LEVELS.map((l) => (
-              <option key={l} value={l}>{l}</option>
+              // value 保持枚举（提交给写接口），显示用中文档位
+              <option key={l} value={l}>{verificationLabel(l)}</option>
             ))}
           </select>
         </Field>
@@ -206,7 +210,7 @@ export default function ProductForm({
       {needsEvidence && (
         <>
           <Field
-            label="验证证据（中文，BENCH_TESTED / CERTIFIED 必填）"
+            label="验证证据（中文，实测验证 / 第三方认证必填）"
             error={fieldErrors.verifiedEvidence}
           >
             <input
@@ -252,7 +256,7 @@ export default function ProductForm({
 
       <div>
         <div className="flex items-center justify-between mb-2">
-          <span className="text-sm font-medium text-slate-700">技术参数</span>
+          <span className="text-sm font-medium text-[var(--color-bone-2)]">技术参数</span>
           <button
             type="button"
             onClick={() => set("specs", [...v.specs, { label: "", labelEn: "", value: "" }])}
@@ -286,7 +290,7 @@ export default function ProductForm({
                 <button
                   type="button"
                   onClick={() => set("specs", v.specs.filter((_, idx) => idx !== i))}
-                  className="text-sm text-red-600 hover:underline"
+                  className="text-sm text-[var(--color-amber-2)] hover:underline"
                 >
                   删除
                 </button>
@@ -309,16 +313,16 @@ export default function ProductForm({
         onCancel={() => setI18nIssues([])}
       />
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-[var(--color-amber-2)]">{error}</p>}
       <div className="flex gap-3">
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-[var(--color-brand)] text-white px-5 py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+          className="rounded-[2px] bg-[var(--color-brand)] text-[var(--color-on-brand)] px-5 py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-50"
         >
           {loading ? "保存中…" : "保存"}
         </button>
-        <Link href="/admin" className="px-5 py-2.5 text-sm text-slate-500 hover:underline">
+        <Link href="/admin" className="px-5 py-2.5 text-sm text-[var(--color-muted)] hover:underline">
           取消
         </Link>
       </div>
@@ -337,7 +341,7 @@ function Field({
 }) {
   return (
     <label className="block">
-      <span className="block text-sm text-slate-600 mb-1">{label}</span>
+      <span className="block text-sm text-[var(--color-muted)] mb-1">{label}</span>
       {children}
       <FieldMessage message={error} />
     </label>

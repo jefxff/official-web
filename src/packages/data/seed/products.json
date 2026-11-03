@@ -11,21 +11,61 @@
     "descriptionZh": "FM8001 是一款低压差线性稳压器，在 1kHz 处提供 65dB 的高电源抑制比，输出噪声低至 17μVRMS，支持 2.2V–5.5V 输入，最大输出电流 500mA。",
     "descriptionEn": "The FM8001 is a low-dropout linear regulator offering 65dB PSRR at 1kHz and 17μVRMS output noise, supporting 2.2V–5.5V input and up to 500mA output.",
     "specsZh": [
-      { "label": "输入电压", "labelEn": "Input Voltage", "value": "2.2V – 5.5V" },
-      { "label": "输出电流", "labelEn": "Output Current", "value": "500mA" },
-      { "label": "压差", "labelEn": "Dropout", "value": "120mV @ 500mA" },
-      { "label": "输出噪声", "labelEn": "Output Noise", "value": "17μVRMS" },
-      { "label": "PSRR", "labelEn": "PSRR", "value": "65dB @ 1kHz" }
+      {
+        "label": "输入电压",
+        "labelEn": "Input Voltage",
+        "value": "2.2V – 5.5V"
+      },
+      {
+        "label": "输出电流",
+        "labelEn": "Output Current",
+        "value": "500mA"
+      },
+      {
+        "label": "压差",
+        "labelEn": "Dropout",
+        "value": "120mV @ 500mA"
+      },
+      {
+        "label": "输出噪声",
+        "labelEn": "Output Noise",
+        "value": "17μVRMS"
+      },
+      {
+        "label": "PSRR",
+        "labelEn": "PSRR",
+        "value": "65dB @ 1kHz"
+      }
     ],
     "specsEn": [
-      { "label": "Input Voltage", "labelEn": "Input Voltage", "value": "2.2V – 5.5V" },
-      { "label": "Output Current", "labelEn": "Output Current", "value": "500mA" },
-      { "label": "Dropout", "labelEn": "Dropout", "value": "120mV @ 500mA" },
-      { "label": "Output Noise", "labelEn": "Output Noise", "value": "17μVRMS" },
-      { "label": "PSRR", "labelEn": "PSRR", "value": "65dB @ 1kHz" }
+      {
+        "label": "Input Voltage",
+        "labelEn": "Input Voltage",
+        "value": "2.2V – 5.5V"
+      },
+      {
+        "label": "Output Current",
+        "labelEn": "Output Current",
+        "value": "500mA"
+      },
+      {
+        "label": "Dropout",
+        "labelEn": "Dropout",
+        "value": "120mV @ 500mA"
+      },
+      {
+        "label": "Output Noise",
+        "labelEn": "Output Noise",
+        "value": "17μVRMS"
+      },
+      {
+        "label": "PSRR",
+        "labelEn": "PSRR",
+        "value": "65dB @ 1kHz"
+      }
     ],
-    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM8001.pdf",
-    "appNoteUrl": "https://cdn.fmw.example/appnotes/FM8001_AN.pdf",
+    "datasheetUrl": "/datasheets/FM8001.pdf",
+    "appNoteUrl": "/appnotes/FM8001_AN.pdf",
     "verificationLevel": "BENCH_TESTED",
     "verifiedEvidence": "内部 benches 实测报告 BR-2026-0142：10 台样品于 25°C 验证 PSRR 与噪声指标。",
     "verifiedEvidenceEn": "Internal bench report BR-2026-0142: PSRR and output noise verified on 10 samples at 25°C."
@@ -42,20 +82,122 @@
     "descriptionZh": "FM8002 面向工业应用，支持 1A 连续输出，PSRR 达 70dB，工作温度范围 -40°C 至 125°C。",
     "descriptionEn": "The FM8002 targets industrial use with 1A continuous output, 70dB PSRR and -40°C to 125°C operation.",
     "specsZh": [
-      { "label": "输入电压", "labelEn": "Input Voltage", "value": "2.5V – 6.0V" },
-      { "label": "输出电流", "labelEn": "Output Current", "value": "1A" },
-      { "label": "PSRR", "labelEn": "PSRR", "value": "70dB @ 1kHz" },
-      { "label": "工作温度", "labelEn": "Temp Range", "value": "-40°C ~ 125°C" }
+      {
+        "label": "输入电压",
+        "labelEn": "Input Voltage",
+        "value": "2.5V – 6.0V"
+      },
+      {
+        "label": "输出电流",
+        "labelEn": "Output Current",
+        "value": "1A"
+      },
+      {
+        "label": "PSRR",
+        "labelEn": "PSRR",
+        "value": "70dB @ 1kHz"
+      },
+      {
+        "label": "工作温度",
+        "labelEn": "Temp Range",
+        "value": "-40°C ~ 125°C"
+      }
     ],
     "specsEn": [
-      { "label": "Input Voltage", "labelEn": "Input Voltage", "value": "2.5V – 6.0V" },
-      { "label": "Output Current", "labelEn": "Output Current", "value": "1A" },
-      { "label": "PSRR", "labelEn": "PSRR", "value": "70dB @ 1kHz" },
-      { "label": "Temp Range", "labelEn": "Temp Range", "value": "-40°C ~ 125°C" }
+      {
+        "label": "Input Voltage",
+        "labelEn": "Input Voltage",
+        "value": "2.5V – 6.0V"
+      },
+      {
+        "label": "Output Current",
+        "labelEn": "Output Current",
+        "value": "1A"
+      },
+      {
+        "label": "PSRR",
+        "labelEn": "PSRR",
+        "value": "70dB @ 1kHz"
+      },
+      {
+        "label": "Temp Range",
+        "labelEn": "Temp Range",
+        "value": "-40°C ~ 125°C"
+      }
     ],
-    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM8002.pdf",
+    "datasheetUrl": "/datasheets/FM8002.pdf",
+    "appNoteUrl": "/appnotes/FM8002_AN.pdf",
     "verificationLevel": "DATASHEET",
     "verifiedEvidence": null
+  },
+  {
+    "id": "p-fm8003",
+    "mpn": "FM8003",
+    "category": "LDO",
+    "seriesId": "srv-ldo",
+    "nameZh": "FM8003 300mA 纳安级静态电流 LDO",
+    "nameEn": "FM8003 300mA Nano-Power LDO",
+    "summaryZh": "静态电流 1.2μA，适合常电待机的电池供电设备。",
+    "summaryEn": "1.2μA quiescent current for always-on battery-powered devices.",
+    "descriptionZh": "FM8003 面向常电待机的电池设备，静态电流低至 1.2μA，支持 1.8V–5.5V 输入与 300mA 输出，关断电流小于 100nA。",
+    "descriptionEn": "Designed for always-on battery devices, the FM8003 offers 1.2μA quiescent current, 1.8V-5.5V input and 300mA output, with shutdown current below 100nA.",
+    "specsZh": [
+      {
+        "label": "输入电压",
+        "labelEn": "Input Voltage",
+        "value": "1.8V – 5.5V"
+      },
+      {
+        "label": "输出电流",
+        "labelEn": "Output Current",
+        "value": "300mA"
+      },
+      {
+        "label": "静态电流",
+        "labelEn": "Quiescent Current",
+        "value": "1.2μA"
+      },
+      {
+        "label": "关断电流",
+        "labelEn": "Shutdown Current",
+        "value": "< 100nA"
+      },
+      {
+        "label": "封装",
+        "labelEn": "Package",
+        "value": "SOT-23-5"
+      }
+    ],
+    "specsEn": [
+      {
+        "label": "Input Voltage",
+        "labelEn": "Input Voltage",
+        "value": "1.8V – 5.5V"
+      },
+      {
+        "label": "Output Current",
+        "labelEn": "Output Current",
+        "value": "300mA"
+      },
+      {
+        "label": "Quiescent Current",
+        "labelEn": "Quiescent Current",
+        "value": "1.2μA"
+      },
+      {
+        "label": "Shutdown Current",
+        "labelEn": "Shutdown Current",
+        "value": "< 100nA"
+      },
+      {
+        "label": "Package",
+        "labelEn": "Package",
+        "value": "SOT-23-5"
+      }
+    ],
+    "datasheetUrl": "/datasheets/FM8003.pdf",
+    "appNoteUrl": "/appnotes/FM8003_AN.pdf",
+    "verificationLevel": "DATASHEET"
   },
   {
     "id": "p-fm9001",
@@ -69,18 +211,51 @@
     "descriptionZh": "FM9001 集成两路同步降压与一路 LDO，内置线性锂电充电管理，适用于穿戴与便携设备。",
     "descriptionEn": "The FM9001 integrates two synchronous bucks and one LDO with linear Li-ion charging for wearables and portables.",
     "specsZh": [
-      { "label": "Buck 通道", "labelEn": "Buck Channels", "value": "2" },
-      { "label": "LDO 通道", "labelEn": "LDO Channels", "value": "1" },
-      { "label": "充电电流", "labelEn": "Charge Current", "value": "500mA" },
-      { "label": "待机功耗", "labelEn": "Standby", "value": "< 5μA" }
+      {
+        "label": "Buck 通道",
+        "labelEn": "Buck Channels",
+        "value": "2"
+      },
+      {
+        "label": "LDO 通道",
+        "labelEn": "LDO Channels",
+        "value": "1"
+      },
+      {
+        "label": "充电电流",
+        "labelEn": "Charge Current",
+        "value": "500mA"
+      },
+      {
+        "label": "待机功耗",
+        "labelEn": "Standby",
+        "value": "< 5μA"
+      }
     ],
     "specsEn": [
-      { "label": "Buck Channels", "labelEn": "Buck Channels", "value": "2" },
-      { "label": "LDO Channels", "labelEn": "LDO Channels", "value": "1" },
-      { "label": "Charge Current", "labelEn": "Charge Current", "value": "500mA" },
-      { "label": "Standby", "labelEn": "Standby", "value": "< 5μA" }
+      {
+        "label": "Buck Channels",
+        "labelEn": "Buck Channels",
+        "value": "2"
+      },
+      {
+        "label": "LDO Channels",
+        "labelEn": "LDO Channels",
+        "value": "1"
+      },
+      {
+        "label": "Charge Current",
+        "labelEn": "Charge Current",
+        "value": "500mA"
+      },
+      {
+        "label": "Standby",
+        "labelEn": "Standby",
+        "value": "< 5μA"
+      }
     ],
-    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM9001.pdf",
+    "datasheetUrl": "/datasheets/FM9001.pdf",
+    "appNoteUrl": "/appnotes/FM9001_AN.pdf",
     "verificationLevel": "BENCH_TESTED",
     "verifiedEvidence": "内部 benches BR-2026-0201：效率曲线于 200mA/500mA 负载实测。",
     "verifiedEvidenceEn": "Internal bench report BR-2026-0201: efficiency curve measured at 200mA / 500mA loads."
@@ -97,18 +272,114 @@
     "descriptionZh": "FM9002 提供三路降压与一路升压，支持 I²C 动态调压，面向多电压域 SoC 供电。",
     "descriptionEn": "The FM9002 provides three bucks and one boost with I²C dynamic voltage scaling for multi-rail SoC power.",
     "specsZh": [
-      { "label": "Buck 通道", "labelEn": "Buck Channels", "value": "3" },
-      { "label": "Boost 通道", "labelEn": "Boost Channels", "value": "1" },
-      { "label": "接口", "labelEn": "Interface", "value": "I²C" }
+      {
+        "label": "Buck 通道",
+        "labelEn": "Buck Channels",
+        "value": "3"
+      },
+      {
+        "label": "Boost 通道",
+        "labelEn": "Boost Channels",
+        "value": "1"
+      },
+      {
+        "label": "接口",
+        "labelEn": "Interface",
+        "value": "I²C"
+      }
     ],
     "specsEn": [
-      { "label": "Buck Channels", "labelEn": "Buck Channels", "value": "3" },
-      { "label": "Boost Channels", "labelEn": "Boost Channels", "value": "1" },
-      { "label": "Interface", "labelEn": "Interface", "value": "I²C" }
+      {
+        "label": "Buck Channels",
+        "labelEn": "Buck Channels",
+        "value": "3"
+      },
+      {
+        "label": "Boost Channels",
+        "labelEn": "Boost Channels",
+        "value": "1"
+      },
+      {
+        "label": "Interface",
+        "labelEn": "Interface",
+        "value": "I²C"
+      }
     ],
-    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM9002.pdf",
+    "datasheetUrl": "/datasheets/FM9002.pdf",
+    "appNoteUrl": "/appnotes/FM9002_AN.pdf",
     "verificationLevel": "INTERNAL",
     "verifiedEvidence": null
+  },
+  {
+    "id": "p-fm9003",
+    "mpn": "FM9003",
+    "category": "PMIC",
+    "seriesId": "srv-pmic",
+    "nameZh": "FM9003 单节锂电充电 + 升压 PMIC",
+    "nameEn": "FM9003 Single-Cell Charger + Boost PMIC",
+    "summaryZh": "1A 线性充电与 5V/1A 升压集成，面向 TWS 充电仓。",
+    "summaryEn": "1A linear charger plus 5V/1A boost, targeting TWS charging cases.",
+    "descriptionZh": "FM9003 集成 1A 线性充电、5V/1A 同步升压与电量指示，外围仅需 6 个元件，适用于 TWS 充电仓与便携小家电。",
+    "descriptionEn": "The FM9003 integrates a 1A linear charger, 5V/1A synchronous boost and LED indicators. Only six external components are required, suiting TWS cases and portable appliances.",
+    "specsZh": [
+      {
+        "label": "充电电流",
+        "labelEn": "Charge Current",
+        "value": "1A（可编程）"
+      },
+      {
+        "label": "升压输出",
+        "labelEn": "Boost Output",
+        "value": "5V / 1A"
+      },
+      {
+        "label": "输入电压",
+        "labelEn": "Input Voltage",
+        "value": "3.0V – 5.5V"
+      },
+      {
+        "label": "充电截止精度",
+        "labelEn": "CV Accuracy",
+        "value": "±1%"
+      },
+      {
+        "label": "封装",
+        "labelEn": "Package",
+        "value": "QFN-16 3×3"
+      }
+    ],
+    "specsEn": [
+      {
+        "label": "Charge Current",
+        "labelEn": "Charge Current",
+        "value": "1A（可编程）"
+      },
+      {
+        "label": "Boost Output",
+        "labelEn": "Boost Output",
+        "value": "5V / 1A"
+      },
+      {
+        "label": "Input Voltage",
+        "labelEn": "Input Voltage",
+        "value": "3.0V – 5.5V"
+      },
+      {
+        "label": "CV Accuracy",
+        "labelEn": "CV Accuracy",
+        "value": "±1%"
+      },
+      {
+        "label": "Package",
+        "labelEn": "Package",
+        "value": "QFN-16 3×3"
+      }
+    ],
+    "datasheetUrl": "/datasheets/FM9003.pdf",
+    "appNoteUrl": "/appnotes/FM9003_AN.pdf",
+    "verificationLevel": "BENCH_TESTED",
+    "verifiedEvidence": "内部实测报告 BR-2026-0207：25°C 下充电电流精度 ±3%，升压效率峰值 93.5%。",
+    "verifiedEvidenceEn": "Internal bench report BR-2026-0207: charge current accuracy within ±3% at 25°C, peak boost efficiency 93.5%."
   },
   {
     "id": "p-fm3001",
@@ -122,16 +393,41 @@
     "descriptionZh": "FM3001 为中低压 N 沟道 MOSFET，导通电阻 5.2mΩ，适用于同步整流与电机驱动。",
     "descriptionEn": "The FM3001 is a low/mid-voltage N-ch MOSFET with 5.2mΩ Rds(on) for sync-rect and motor drive.",
     "specsZh": [
-      { "label": "VDS", "labelEn": "VDS", "value": "30V" },
-      { "label": "ID", "labelEn": "ID", "value": "60A" },
-      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "5.2mΩ" }
+      {
+        "label": "VDS",
+        "labelEn": "VDS",
+        "value": "30V"
+      },
+      {
+        "label": "ID",
+        "labelEn": "ID",
+        "value": "60A"
+      },
+      {
+        "label": "Rds(on)",
+        "labelEn": "Rds(on)",
+        "value": "5.2mΩ"
+      }
     ],
     "specsEn": [
-      { "label": "VDS", "labelEn": "VDS", "value": "30V" },
-      { "label": "ID", "labelEn": "ID", "value": "60A" },
-      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "5.2mΩ" }
+      {
+        "label": "VDS",
+        "labelEn": "VDS",
+        "value": "30V"
+      },
+      {
+        "label": "ID",
+        "labelEn": "ID",
+        "value": "60A"
+      },
+      {
+        "label": "Rds(on)",
+        "labelEn": "Rds(on)",
+        "value": "5.2mΩ"
+      }
     ],
-    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM3001.pdf",
+    "datasheetUrl": "/datasheets/FM3001.pdf",
+    "appNoteUrl": "/appnotes/FM3001_AN.pdf",
     "verificationLevel": "CERTIFIED",
     "verifiedEvidence": "AEC-Q101 车规认证证书 CERT-2026-031：全温区 Rds(on) 与 BVdss 验证。",
     "verifiedEvidenceEn": "AEC-Q101 automotive-grade certificate CERT-2026-031: full-temperature-range validation of Rds(on) and BVdss."
@@ -148,17 +444,113 @@
     "descriptionZh": "FM3002 为双 N 沟道集成 MOSFET，适用于电池包保护与负载开关。",
     "descriptionEn": "The FM3002 is a dual N-ch integrated MOSFET for battery-pack protection and load switching.",
     "specsZh": [
-      { "label": "VDS", "labelEn": "VDS", "value": "20V" },
-      { "label": "ID", "labelEn": "ID", "value": "100A" },
-      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "3.8mΩ" }
+      {
+        "label": "VDS",
+        "labelEn": "VDS",
+        "value": "20V"
+      },
+      {
+        "label": "ID",
+        "labelEn": "ID",
+        "value": "100A"
+      },
+      {
+        "label": "Rds(on)",
+        "labelEn": "Rds(on)",
+        "value": "3.8mΩ"
+      }
     ],
     "specsEn": [
-      { "label": "VDS", "labelEn": "VDS", "value": "20V" },
-      { "label": "ID", "labelEn": "ID", "value": "100A" },
-      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "3.8mΩ" }
+      {
+        "label": "VDS",
+        "labelEn": "VDS",
+        "value": "20V"
+      },
+      {
+        "label": "ID",
+        "labelEn": "ID",
+        "value": "100A"
+      },
+      {
+        "label": "Rds(on)",
+        "labelEn": "Rds(on)",
+        "value": "3.8mΩ"
+      }
     ],
-    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM3002.pdf",
+    "datasheetUrl": "/datasheets/FM3002.pdf",
+    "appNoteUrl": "/appnotes/FM3002_AN.pdf",
     "verificationLevel": "DATASHEET",
     "verifiedEvidence": null
+  },
+  {
+    "id": "p-fm3003",
+    "mpn": "FM3003",
+    "category": "MOSFET",
+    "seriesId": "srv-mos",
+    "nameZh": "FM3003 60V 40A N 沟道 MOSFET",
+    "nameEn": "FM3003 60V 40A N-Channel MOSFET",
+    "summaryZh": "Rds(on) 8.5mΩ，适用于 48V 电池保护与电机驱动。",
+    "summaryEn": "8.5mΩ Rds(on) for 48V battery protection and motor drive.",
+    "descriptionZh": "FM3003 为 60V 耐压 N 沟道功率 MOSFET，导通电阻 8.5mΩ，栅极电荷 18nC，适合 48V 电池保护板与低压电机驱动。",
+    "descriptionEn": "A 60V N-channel power MOSFET with 8.5mΩ Rds(on) and 18nC gate charge, suited to 48V battery protection boards and low-voltage motor drives.",
+    "specsZh": [
+      {
+        "label": "耐压 Vds",
+        "labelEn": "Vds",
+        "value": "60V"
+      },
+      {
+        "label": "连续电流",
+        "labelEn": "Continuous Current",
+        "value": "40A"
+      },
+      {
+        "label": "导通电阻",
+        "labelEn": "Rds(on)",
+        "value": "8.5mΩ @ 10V"
+      },
+      {
+        "label": "栅极电荷",
+        "labelEn": "Qg",
+        "value": "18nC"
+      },
+      {
+        "label": "封装",
+        "labelEn": "Package",
+        "value": "PDFN5×6"
+      }
+    ],
+    "specsEn": [
+      {
+        "label": "Vds",
+        "labelEn": "Vds",
+        "value": "60V"
+      },
+      {
+        "label": "Continuous Current",
+        "labelEn": "Continuous Current",
+        "value": "40A"
+      },
+      {
+        "label": "Rds(on)",
+        "labelEn": "Rds(on)",
+        "value": "8.5mΩ @ 10V"
+      },
+      {
+        "label": "Qg",
+        "labelEn": "Qg",
+        "value": "18nC"
+      },
+      {
+        "label": "Package",
+        "labelEn": "Package",
+        "value": "PDFN5×6"
+      }
+    ],
+    "datasheetUrl": "/datasheets/FM3003.pdf",
+    "appNoteUrl": "/appnotes/FM3003_AN.pdf",
+    "verificationLevel": "BENCH_TESTED",
+    "verifiedEvidence": "内部实测报告 BR-2026-0188：125°C 下 Rds(on) 上升 21%，满足降额要求。",
+    "verifiedEvidenceEn": "Internal bench report BR-2026-0188: Rds(on) rises 21% at 125°C, within derating limits."
   }
 ]

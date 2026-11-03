@@ -95,11 +95,11 @@ export default function ArticleForm({
   }
 
   return (
-    <form onSubmit={submit} className="max-w-3xl space-y-5 bg-white p-6 rounded-lg shadow">
+    <form onSubmit={submit} className="max-w-3xl space-y-5 bg-[var(--color-surface)] p-6 rounded-[2px] shadow-none">
       <h1 className="text-xl font-semibold">{isEdit ? "编辑资讯" : "新建资讯"}</h1>
       <div className="grid grid-cols-2 gap-4">
         <label className="block">
-          <span className="block text-sm text-slate-600 mb-1">Slug</span>
+          <span className="block text-sm text-[var(--color-muted)] mb-1">Slug</span>
           <input
             disabled={isEdit}
             value={v.slug}
@@ -118,7 +118,7 @@ export default function ArticleForm({
           <FieldMessage message={fieldErrors.coverImage} />
         </div>
         <label className="block">
-          <span className="block text-sm text-slate-600 mb-1">标题（中文）</span>
+          <span className="block text-sm text-[var(--color-muted)] mb-1">标题（中文）</span>
           <input
             value={v.titleZh}
             onChange={(e) => set("titleZh", e.target.value)}
@@ -127,7 +127,7 @@ export default function ArticleForm({
           <FieldMessage message={fieldErrors.titleZh} />
         </label>
         <label className="block">
-          <span className="block text-sm text-slate-600 mb-1">标题（英文）</span>
+          <span className="block text-sm text-[var(--color-muted)] mb-1">标题（英文）</span>
           <input
             value={v.titleEn}
             onChange={(e) => set("titleEn", e.target.value)}
@@ -136,7 +136,7 @@ export default function ArticleForm({
           <FieldMessage message={fieldErrors.titleEn} />
         </label>
         <label className="block">
-          <span className="block text-sm text-slate-600 mb-1">摘要（中文）</span>
+          <span className="block text-sm text-[var(--color-muted)] mb-1">摘要（中文）</span>
           <input
             value={v.excerptZh}
             onChange={(e) => set("excerptZh", e.target.value)}
@@ -145,7 +145,7 @@ export default function ArticleForm({
           <FieldMessage message={fieldErrors.excerptZh} />
         </label>
         <label className="block">
-          <span className="block text-sm text-slate-600 mb-1">摘要（英文）</span>
+          <span className="block text-sm text-[var(--color-muted)] mb-1">摘要（英文）</span>
           <input
             value={v.excerptEn}
             onChange={(e) => set("excerptEn", e.target.value)}
@@ -156,7 +156,7 @@ export default function ArticleForm({
       </div>
 
       <label className="block">
-        <span className="block text-sm text-slate-600 mb-1">正文（中文，支持 Markdown）</span>
+        <span className="block text-sm text-[var(--color-muted)] mb-1">正文（中文，支持 Markdown）</span>
         <textarea
           value={v.bodyZh}
           onChange={(e) => set("bodyZh", e.target.value)}
@@ -166,7 +166,7 @@ export default function ArticleForm({
         <FieldMessage message={fieldErrors.bodyZh} />
       </label>
       <label className="block">
-        <span className="block text-sm text-slate-600 mb-1">正文（英文，支持 Markdown）</span>
+        <span className="block text-sm text-[var(--color-muted)] mb-1">正文（英文，支持 Markdown）</span>
         <textarea
           value={v.bodyEn}
           onChange={(e) => set("bodyEn", e.target.value)}
@@ -186,16 +186,16 @@ export default function ArticleForm({
         onCancel={() => setI18nIssues([])}
       />
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+      {error && <p className="text-sm text-[var(--color-amber-2)]">{error}</p>}
       <div className="flex gap-3">
         <button
           type="submit"
           disabled={loading}
-          className="rounded-lg bg-[var(--color-brand)] text-white px-5 py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-50"
+          className="rounded-[2px] bg-[var(--color-brand)] text-[var(--color-on-brand)] px-5 py-2.5 text-sm font-medium hover:opacity-90 disabled:opacity-50"
         >
           {loading ? "保存中…" : "保存"}
         </button>
-        <Link href="/admin" className="px-5 py-2.5 text-sm text-slate-500 hover:underline">
+        <Link href="/admin" className="px-5 py-2.5 text-sm text-[var(--color-muted)] hover:underline">
           取消
         </Link>
       </div>

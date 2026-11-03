@@ -30,6 +30,9 @@ src/packages/db/generated/
 # 媒体上传（local provider）——不入库，生产挂载共享存储
 .media/
 
+# 询盘文件兜底（无数据库时的演示通道）——含客户信息，切勿提交
+.data/
+
 # editor
 .vscode/
 .idea/

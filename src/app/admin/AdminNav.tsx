@@ -11,22 +11,37 @@ export default function AdminNav({ user }: { user: string }) {
     router.refresh();
   }
   return (
-    <aside className="w-56 bg-slate-900 text-slate-100 p-5 flex flex-col gap-6">
+    <aside className="flex w-60 shrink-0 flex-col border-r border-[var(--color-line)] bg-[var(--color-void)] p-5">
       <div>
-        <div className="text-lg font-semibold">富满微 · 后台</div>
-        <div className="text-xs text-slate-400 mt-1">国内唯一写点</div>
+        <div className="label">FMW / Admin</div>
+        <div className="mt-2 text-[15px] font-bold text-[var(--color-bone)]">富满微 · 后台</div>
+        <div className="mono mt-1 text-[10px] tracking-[0.14em] text-[var(--color-muted)] uppercase">
+          国内唯一写点
+        </div>
       </div>
-      <nav className="flex flex-col gap-2 text-sm">
-        <Link href="/admin" className="hover:text-white">仪表盘</Link>
-        <Link href="/admin/products/new" className="hover:text-white">新建料号</Link>
-        <Link href="/admin/articles/new" className="hover:text-white">新建资讯</Link>
-        <Link href="/admin/setup" className="hover:text-white">TOTP 设置</Link>
+
+      <nav className="mt-8 flex flex-col text-[13.5px]">
+        {[
+          { href: "/admin", label: "仪表盘" },
+          { href: "/admin/products/new", label: "新建料号" },
+          { href: "/admin/articles/new", label: "新建资讯" },
+          { href: "/admin/setup", label: "TOTP 设置" },
+        ].map((item) => (
+          <Link
+            key={item.href}
+            href={item.href}
+            className="border-b border-[var(--color-line-soft)] py-3 text-[var(--color-bone-2)] transition-colors hover:text-[var(--color-amber)]"
+          >
+            {item.label}
+          </Link>
+        ))}
       </nav>
-      <div className="mt-auto text-xs text-slate-400">
-        <div>当前用户：{user}</div>
+
+      <div className="mt-auto">
+        <div className="mono text-[11px] text-[var(--color-muted)]">当前用户：{user}</div>
         <button
           onClick={logout}
-          className="mt-2 px-3 py-1.5 rounded bg-slate-700 hover:bg-slate-600 text-slate-100"
+          className="mt-3 w-full border border-[var(--color-line)] px-3 py-2 text-[12.5px] text-[var(--color-bone-2)] transition-colors hover:border-[var(--color-amber)] hover:text-[var(--color-amber)]"
         >
           退出登录
         </button>

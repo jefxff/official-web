@@ -15,7 +15,7 @@ export default async function ProtectedAdminLayout({
   return (
     <div className="min-h-screen flex">
       <AdminNav user={user} />
-      <main className="flex-1 p-8 bg-slate-50">{children}</main>
+      <main className="flex-1 bg-[var(--color-bg)] p-8">{children}</main>
     </div>
   );
 }

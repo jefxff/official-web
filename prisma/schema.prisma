@@ -106,3 +106,21 @@ model AiMessage {
 
   @@index([conversationId, createdAt])
 }
+
+// 站点询盘（联系我们表单）
+// 这是唯一接收匿名写入的表，必须能承受误提交与爬虫：字段全部限长，
+// 不存 IP（与 AI 会话同一隐私口径），status 供后续人工跟进流转。
+model Inquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  company   String?
+  message   String
+  locale    String   @default("zh")
+  source    String   @default("contact")
+  status    String   @default("new") // new | handled | spam
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([status, createdAt])
+}

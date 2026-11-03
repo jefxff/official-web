@@ -27,7 +27,23 @@
     "adv2Title": "合规可信",
     "adv2Desc": "分级验证制度，关键参数附带 bench 实测证据。",
     "adv3Title": "全球交付",
-    "adv3Desc": "国内与海外双节点部署，就近快速响应。"
+    "adv3Desc": "国内主仓直发，随货提供 COA；海外项目由代理网络就近支持。",
+    "seriesTitle": "产品系列",
+    "seriesDesc": "按应用方向划分的三条产品线，覆盖从信号链供电到功率开关。",
+    "ctaTitle": "需要样片与报价？",
+    "ctaDesc": "告诉我们料号与用量，工作日 24 小时内给出选型建议、样片与交期。",
+    "ctaButton": "联系销售",
+    "statParts": "在售料号",
+    "statSeries": "产品系列",
+    "statDocs": "技术资料",
+    "ticker": [
+      "选型支持",
+      "数据手册",
+      "应用笔记",
+      "实测报告",
+      "第三方认证",
+      "样品与量产"
+    ]
   },
   "products": {
     "title": "产品中心",
@@ -44,14 +60,27 @@
     "benchTested": "实测验证",
     "datasheet": "数据手册",
     "appNote": "应用笔记",
-    "ctaQuote": "获取样品 / 询价"
+    "ctaQuote": "获取样品 / 询价",
+    "vInternal": "内部设计值",
+    "vDatasheet": "数据手册值",
+    "vBenchTested": "实测验证",
+    "vCertified": "第三方认证",
+    "evidence": "验证证据",
+    "partCount": "{count} 款料号 →",
+    "all": "全部",
+    "filter": "按类别筛选",
+    "count": "{count} 个料号",
+    "emptyHint": "换个关键字试试，或直接联系我们索取选型表。",
+    "colProduct": "产品",
+    "colSpec": "关键参数"
   },
   "news": {
     "title": "新闻资讯",
     "subtitle": "公司动态、产品发布与技术文章。",
     "readMore": "阅读全文",
     "publishedOn": "发布于",
-    "backToList": "返回列表"
+    "backToList": "返回列表",
+    "items": "条资讯"
   },
   "about": {
     "title": "关于富满微",
@@ -59,7 +88,14 @@
     "mission": "使命",
     "missionBody": "以高可靠、低功耗的芯片产品，赋能千行百业的智能化与绿色化。",
     "culture": "价值观",
-    "cultureBody": "以客户为中心，以工程师文化为根基，长期主义地打磨每一颗芯片。"
+    "cultureBody": "以客户为中心，以工程师文化为根基，长期主义地打磨每一颗芯片。",
+    "statParts": "在售料号",
+    "statSeries": "产品系列",
+    "statArticles": "技术资讯",
+    "quality": "质量与验证",
+    "qualityBody": "每一颗料号的电气指标都标注验证等级：数据手册值、内部实测或第三方认证。实测项会附上报告编号，认证类指标可追溯到第三方实验室报告——客户做准入审查时不需要再来回确认哪条数据能信。",
+    "global": "全球交付",
+    "globalBody": "样片与量产订单从国内主仓发出，可随货提供 COA 与出口报关资料；海外项目由代理网络提供本地技术支持，对口工程师按客户时区安排沟通。"
   },
   "contact": {
     "title": "联系我们",
@@ -72,7 +108,11 @@
     "submitted": "已收到您的留言，我们会尽快与您联系。",
     "address": "地址",
     "phone": "电话",
-    "emailLabel": "邮箱"
+    "emailLabel": "邮箱",
+    "sending": "提交中…",
+    "error": "提交失败，请稍后重试，或直接发送邮件至 sales@fmw.example。",
+    "reply": "工作日 24 小时内回复",
+    "sla": "平均响应时间"
   },
   "search": {
     "title": "搜索",
