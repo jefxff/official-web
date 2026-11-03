@@ -1,0 +1,26 @@
+[
+  {
+    "id": "srv-ldo",
+    "slug": "ldo-regulators",
+    "nameZh": "低压差线性稳压器 (LDO)",
+    "nameEn": "LDO Regulators",
+    "descriptionZh": "超低噪声、高 PSRR 的 LDO 系列，适用于对电源纹波敏感的模拟前端。",
+    "descriptionEn": "Ultra-low-noise, high-PSRR LDO family for analog-front-ends sensitive to ripple."
+  },
+  {
+    "id": "srv-pmic",
+    "slug": "pmic-power-management",
+    "nameZh": "电源管理芯片 (PMIC)",
+    "nameEn": "Power Management ICs",
+    "descriptionZh": "多通道 buck/boost 与锂电充电管理，覆盖便携与工业场景。",
+    "descriptionEn": "Multi-channel buck/boost and Li-ion charging management for portable and industrial use."
+  },
+  {
+    "id": "srv-mos",
+    "slug": "power-mosfet",
+    "nameZh": "功率 MOSFET",
+    "nameEn": "Power MOSFETs",
+    "descriptionZh": "低导通电阻、高可靠性的中低压 MOSFET 系列。",
+    "descriptionEn": "Low Rds(on), reliable low/mid-voltage MOSFET family."
+  }
+]

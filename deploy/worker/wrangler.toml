@@ -1,0 +1,16 @@
+name = "fmw-global-edge"
+main = "src/worker.js"
+compatibility_date = "2024-11-01"
+
+# 海外边缘 Worker：对全球访问做缓存 + 回源反代。
+# 解决的问题（评审 #1 最大架构缺口）：边缘仅含构建时产物，新料号页发布后海外会 404。
+# 本 Worker 在边缘缓存 MISS 时回落反代到国内源站（国内 Node 运行时可 ISR 按需生成），
+# 命中后写入边缘缓存，从而让「新页面」在首次访问后即被海外缓存，不再 404。
+[vars]
+# 国内唯一写点 / 源站域名（部署时通过 secret 或 dashboard 设置）
+ORIGIN_HOST = "origin-cn.fmw.example"
+# 边缘缓存 TTL（秒）
+CACHE_TTL = 300
+
+# 路由：将全球域名指向本 Worker（在 Cloudflare DNS/Dashboard 配置）
+# routes = [ "www.fmw.global/*" ]

@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["dom", "dom.iterable", "ES2022"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "preserve",
+    "incremental": true,
+    "plugins": [{ "name": "next" }],
+    "paths": {
+      "@/*": ["./src/*"],
+      "@fmw/db": ["./src/packages/db"],
+      "@fmw/data": ["./src/packages/data"],
+      "@fmw/data/*": ["./src/packages/data/*"],
+      "@fmw/cache": ["./src/packages/cache-invalidate"],
+      "@fmw/seo": ["./src/packages/seo"],
+      "@fmw/i18n": ["./src/packages/i18n"],
+      "@fmw/auth": ["./src/packages/auth"],
+      "@fmw/search": ["./src/packages/search"],
+      "@fmw/publish": ["./src/packages/publish"],
+      "@fmw/ai": ["./src/packages/ai"],
+      "@fmw/ai/*": ["./src/packages/ai/*"],
+      "@fmw/observability": ["./src/packages/observability"]
+    }
+  },
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  "exclude": ["node_modules"]
+}

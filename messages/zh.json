@@ -1,0 +1,113 @@
+{
+  "site": {
+    "name": "富满微",
+    "tagline": "高性能模拟与功率半导体",
+    "description": "富满微电子（FMW）专注高性能模拟芯片、功率器件与电源管理解决方案，提供料号选型、技术资料与量产支持。"
+  },
+  "nav": {
+    "home": "首页",
+    "products": "产品中心",
+    "series": "产品系列",
+    "news": "新闻资讯",
+    "about": "关于我们",
+    "contact": "联系我们",
+    "search": "搜索"
+  },
+  "home": {
+    "heroTitle": "以芯致精，连接未来",
+    "heroSubtitle": "从消费电子到工业与新能源，富满微为每一块电路板提供可靠的芯片基石。",
+    "ctaProducts": "浏览产品",
+    "ctaContact": "联系我们",
+    "featuredProducts": "重点产品",
+    "viewAll": "查看全部",
+    "latestNews": "最新资讯",
+    "advantageTitle": "我们的优势",
+    "adv1Title": "全栈研发",
+    "adv1Desc": "自有晶圆工艺与封装测试，掌握核心器件全链条。",
+    "adv2Title": "合规可信",
+    "adv2Desc": "分级验证制度，关键参数附带 bench 实测证据。",
+    "adv3Title": "全球交付",
+    "adv3Desc": "国内与海外双节点部署，就近快速响应。"
+  },
+  "products": {
+    "title": "产品中心",
+    "subtitle": "按料号（MPN）检索与浏览富满微全系列产品。",
+    "searchPlaceholder": "输入料号 / 关键字，如 FMxxx",
+    "search": "搜索",
+    "mpn": "料号",
+    "category": "类别",
+    "series": "系列",
+    "noResult": "未找到匹配的产品。",
+    "specs": "技术参数",
+    "documentation": "资料下载",
+    "verification": "验证等级",
+    "benchTested": "实测验证",
+    "datasheet": "数据手册",
+    "appNote": "应用笔记",
+    "ctaQuote": "获取样品 / 询价"
+  },
+  "news": {
+    "title": "新闻资讯",
+    "subtitle": "公司动态、产品发布与技术文章。",
+    "readMore": "阅读全文",
+    "publishedOn": "发布于",
+    "backToList": "返回列表"
+  },
+  "about": {
+    "title": "关于富满微",
+    "subtitle": "一家专注高性能半导体的芯片企业。",
+    "mission": "使命",
+    "missionBody": "以高可靠、低功耗的芯片产品，赋能千行百业的智能化与绿色化。",
+    "culture": "价值观",
+    "cultureBody": "以客户为中心，以工程师文化为根基，长期主义地打磨每一颗芯片。"
+  },
+  "contact": {
+    "title": "联系我们",
+    "subtitle": "商务合作、技术支持与样品申请。",
+    "name": "姓名",
+    "email": "邮箱",
+    "company": "公司",
+    "message": "留言",
+    "submit": "提交",
+    "submitted": "已收到您的留言，我们会尽快与您联系。",
+    "address": "地址",
+    "phone": "电话",
+    "emailLabel": "邮箱"
+  },
+  "search": {
+    "title": "搜索",
+    "placeholder": "搜索产品、料号或资讯……",
+    "submit": "搜索",
+    "noResult": "没有找到结果。",
+    "resultCount": "找到 {count} 条结果"
+  },
+  "footer": {
+    "copyright": "© 2026 富满微电子（FMW）. 保留所有权利。",
+    "links": "快速链接",
+    "contact": "联系方式",
+    "legal": "法律声明"
+  },
+  "common": {
+    "language": "语言",
+    "backHome": "返回首页",
+    "notFound": "页面未找到",
+    "notFoundDesc": "抱歉，您访问的页面不存在或已被移动。"
+  },
+  "ai": {
+    "title": "富满微 AI 助手",
+    "subtitle": "基于已验证产品资料答疑",
+    "placeholder": "输入料号或问题，如 FM8001 的输入电压",
+    "send": "发送",
+    "welcome": "您好，我是富满微 AI 助手。我可以基于已公开验证的产品资料回答料号参数、选型等问题。请告诉我具体料号或类别。",
+    "disclaimer": "答案基于已验证资料，关键参数以数据手册为准。",
+    "suggestions": [
+      "FM8001 的输入电压是多少？",
+      "有哪些 LDO 料号？",
+      "FM3001 的 Rds(on) 是多少？"
+    ],
+    "thinking": "正在思考…",
+    "error": "暂时无法回答，请稍后再试或前往「联系我们」。",
+    "close": "关闭",
+    "open": "打开 AI 助手"
+  }
+}

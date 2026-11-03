@@ -1,0 +1,39 @@
+name: quality
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Prisma generate
+        run: npx prisma generate
+
+      - name: Type check
+        run: npm run typecheck
+
+      - name: Lint
+        run: npm run lint
+
+      - name: Audit (high+)
+        run: npm run audit
+
+      - name: Build (cn target)
+        run: npm run build
+        env:
+          BUILD_TARGET: cn
+          NEXT_PUBLIC_SITE_URL: https://www.fmw.example

@@ -1,0 +1,113 @@
+{
+  "site": {
+    "name": "FMW",
+    "tagline": "High-Performance Analog & Power Semiconductors",
+    "description": "FMW Electronics specializes in high-performance analog ICs, power devices and power-management solutions — with part selection, technical docs and mass-production support."
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "series": "Series",
+    "news": "News",
+    "about": "About",
+    "contact": "Contact",
+    "search": "Search"
+  },
+  "home": {
+    "heroTitle": "Precision Silicon, Connected Future",
+    "heroSubtitle": "From consumer electronics to industrial and new energy, FMW provides the reliable silicon foundation for every circuit board.",
+    "ctaProducts": "Browse Products",
+    "ctaContact": "Contact Us",
+    "featuredProducts": "Featured Products",
+    "viewAll": "View All",
+    "latestNews": "Latest News",
+    "advantageTitle": "Why FMW",
+    "adv1Title": "Full-Stack R&D",
+    "adv1Desc": "In-house wafer process, packaging and test — mastering the whole device chain.",
+    "adv2Title": "Compliant & Trusted",
+    "adv2Desc": "Tiered verification: key parameters ship with bench-tested evidence.",
+    "adv3Title": "Global Delivery",
+    "adv3Desc": "Dual-region deployment (CN/Global) for fast, local response."
+  },
+  "products": {
+    "title": "Products",
+    "subtitle": "Search and browse the full FMW portfolio by part number (MPN).",
+    "searchPlaceholder": "Enter MPN / keyword, e.g. FMxxx",
+    "search": "Search",
+    "mpn": "Part No.",
+    "category": "Category",
+    "series": "Series",
+    "noResult": "No matching products found.",
+    "specs": "Specifications",
+    "documentation": "Downloads",
+    "verification": "Verification",
+    "benchTested": "Bench-Tested",
+    "datasheet": "Datasheet",
+    "appNote": "Application Note",
+    "ctaQuote": "Request Sample / Quote"
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Company updates, product launches and technical articles.",
+    "readMore": "Read more",
+    "publishedOn": "Published on",
+    "backToList": "Back to list"
+  },
+  "about": {
+    "title": "About FMW",
+    "subtitle": "A semiconductor company focused on high-performance ICs.",
+    "mission": "Mission",
+    "missionBody": "Empower the intelligence and green transition of every industry with reliable, low-power chips.",
+    "culture": "Values",
+    "cultureBody": "Customer-centric, engineer-driven culture, and long-term craftsmanship on every chip."
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "Business cooperation, technical support and sample requests.",
+    "name": "Name",
+    "email": "Email",
+    "company": "Company",
+    "message": "Message",
+    "submit": "Submit",
+    "submitted": "We've received your message and will get back to you shortly.",
+    "address": "Address",
+    "phone": "Phone",
+    "emailLabel": "Email"
+  },
+  "search": {
+    "title": "Search",
+    "placeholder": "Search products, parts or news……",
+    "submit": "Search",
+    "noResult": "No results found.",
+    "resultCount": "{count} results found"
+  },
+  "footer": {
+    "copyright": "© 2026 FMW Electronics. All rights reserved.",
+    "links": "Quick Links",
+    "contact": "Contact",
+    "legal": "Legal"
+  },
+  "common": {
+    "language": "Language",
+    "backHome": "Back to Home",
+    "notFound": "Page Not Found",
+    "notFoundDesc": "Sorry, the page you requested does not exist or has moved."
+  },
+  "ai": {
+    "title": "FMW AI Assistant",
+    "subtitle": "Answers from verified product data",
+    "placeholder": "Ask a part or question, e.g. FM8001 input voltage",
+    "send": "Send",
+    "welcome": "Hi, I'm the FMW AI assistant. I answer questions about part specs and selection based on published, verified data. Tell me a part number or category.",
+    "disclaimer": "Answers are based on verified data; key specs follow the datasheet.",
+    "suggestions": [
+      "What is FM8001 input voltage?",
+      "Which LDO parts are available?",
+      "What is FM3001 Rds(on)?"
+    ],
+    "thinking": "Thinking…",
+    "error": "I can't answer right now. Please retry or visit Contact.",
+    "close": "Close",
+    "open": "Open AI Assistant"
+  }
+}

@@ -1,0 +1,17 @@
+# 统一行尾：仓库内一律以 LF 存储，检出时按平台自动转换
+* text=auto eol=lf
+
+# 二进制文件不做任何转换
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary
+*.pdf binary
+
+# 锁文件与生成物保持原样
+package-lock.json -text
+prisma/migrations/** -text

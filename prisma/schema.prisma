@@ -1,0 +1,82 @@
+// 富满微官网 — 领域模型（v1.2 §4 数据模型）
+// 单一写点：所有写入都落地到国内 PostgreSQL（routing 唯一写点原则）。
+// 双语策略：同表存 zh/en 字段，读取时按 locale 选取（避免 JOIN 膨胀）。
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// 验证等级（v1.2 §8 分级验证制度）
+enum VerificationLevel {
+  INTERNAL     // 内部设计值
+  DATASHEET    // 数据手册声明值
+  BENCH_TESTED // 实测验证（须附带证据）
+  CERTIFIED    // 第三方认证
+}
+
+// 产品 / 料号（核心 SEO 实体）
+model Product {
+  id            String             @id @default(cuid())
+  mpn           String             @unique // 料号，URL 主键
+  category      String
+  seriesId      String?
+  series        Series?  @relation(fields: [seriesId], references: [id])
+  nameZh        String
+  nameEn        String
+  summaryZh     String
+  summaryEn     String
+  descriptionZh String
+  descriptionEn String
+  specsZh       Json // 技术参数表（[{label, value}]）
+  specsEn       Json
+  datasheetUrl  String?
+  appNoteUrl    String?
+
+  // —— 分级验证（关键合规卖点）——
+  verificationLevel VerificationLevel @default(INTERNAL)
+  verifiedEvidence  String? // 中文证据原文（BENCH_TESTED/CERTIFIED 时必填，应用层 + DB 双重约束）
+  verifiedEvidenceEn String? // 英文证据原文（双语站必需；缺失时前台回落中文）
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  // 数据库层约束（评审意见落地）：达到实测/认证等级必须填写证据。
+  // 注：本项目 Prisma 版本对 @@check 属性支持有差异，改为在迁移 SQL 中落地：
+  //   ALTER TABLE "Product" ADD CONSTRAINT chk_verified_evidence
+  //     CHECK (verification_level IN ('INTERNAL','DATASHEET') OR "verifiedEvidence" IS NOT NULL);
+  // 应用层（data/index.ts）已做等价校验。
+  @@index([seriesId])
+  @@index([category])
+}
+
+// 产品系列
+model Series {
+  id             String    @id @default(cuid())
+  slug           String    @unique
+  nameZh         String
+  nameEn         String
+  descriptionZh  String?
+  descriptionEn  String?
+  products       Product[]
+  createdAt      DateTime  @default(now())
+}
+
+// 新闻资讯
+model Article {
+  id        String   @id @default(cuid())
+  slug      String   @unique
+  titleZh   String
+  titleEn   String
+  excerptZh String
+  excerptEn String
+  bodyZh    String
+  bodyEn    String
+  coverImage String?
+  publishedAt DateTime @default(now())
+  createdAt DateTime  @default(now())
+}

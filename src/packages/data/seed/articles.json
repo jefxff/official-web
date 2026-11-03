@@ -1,0 +1,38 @@
+[
+  {
+    "id": "a-001",
+    "slug": "fm8001-launch",
+    "titleZh": "富满微发布 FM8001 超低噪声 LDO",
+    "titleEn": "FMW Launches FM8001 Ultra-Low-Noise LDO",
+    "excerptZh": "面向高精度传感器与 RF 前端的 17μVRMS 低噪声稳压器正式量产。",
+    "excerptEn": "A 17μVRMS low-noise regulator for high-precision sensors and RF front-ends enters mass production.",
+    "bodyZh": "富满微今日宣布 FM8001 超低噪声 LDO 正式量产。该器件在 1kHz 处提供 65dB 电源抑制比，输出噪声低至 17μVRMS，可显著降低对电源纹波敏感的模拟前端的本底噪声。样品现已开放申请。",
+    "bodyEn": "FMW today announced mass production of the FM8001 ultra-low-noise LDO. Offering 65dB PSRR at 1kHz and 17μVRMS output noise, it reduces baseline noise in ripple-sensitive analog front-ends. Samples are now available.",
+    "coverImage": "https://cdn.fmw.example/news/fm8001.jpg",
+    "publishedAt": "2026-09-15T09:00:00.000Z"
+  },
+  {
+    "id": "a-002",
+    "slug": "automotive-aecq101",
+    "titleZh": "FM3001 通过 AEC-Q101 车规认证",
+    "titleEn": "FM3001 Passes AEC-Q101 Automotive Qualification",
+    "excerptZh": "30V/60A N 沟道 MOSFET 获得车规认证，正式进入车载供应链。",
+    "excerptEn": "The 30V/60A N-ch MOSFET is automotive-qualified and enters the vehicle supply chain.",
+    "bodyZh": "经第三方实验室全温区验证，FM3001 在 -40°C 至 175°C 结温范围内保持稳定的 Rds(on) 与击穿电压，正式获得 AEC-Q101 认证，可用于车载电源与电机驱动。",
+    "bodyEn": "Validated across -40°C to 175°C junction temperature by a third-party lab, the FM3001 maintains stable Rds(on) and BVdss and is now AEC-Q101 qualified for automotive power and motor drive.",
+    "coverImage": "https://cdn.fmw.example/news/fm3001.jpg",
+    "publishedAt": "2026-08-20T09:00:00.000Z"
+  },
+  {
+    "id": "a-003",
+    "slug": "green-energy-power",
+    "titleZh": "富满微功率器件赋能新能源",
+    "titleEn": "FMW Power Devices Empower New Energy",
+    "excerptZh": "从储能 BMS 到光伏优化器，低损耗 MOSFET 与 PMIC 助力绿色转型。",
+    "excerptEn": "From storage BMS to PV optimizers, low-loss MOSFETs and PMICs drive the green transition.",
+    "bodyZh": "随着新能源装机增长，富满微的低导通电阻 MOSFET 与高集成 PMIC 在储能 BMS、光伏优化器与充电桩中获得了广泛应用，助力系统效率提升与功耗下降。",
+    "bodyEn": "With rising renewable capacity, FMW's low-Rds(on) MOSFETs and highly integrated PMICs are widely used in storage BMS, PV optimizers and chargers — boosting efficiency and cutting losses.",
+    "coverImage": "https://cdn.fmw.example/news/green.jpg",
+    "publishedAt": "2026-07-10T09:00:00.000Z"
+  }
+]

@@ -1,0 +1,164 @@
+[
+  {
+    "id": "p-fm8001",
+    "mpn": "FM8001",
+    "category": "LDO",
+    "seriesId": "srv-ldo",
+    "nameZh": "FM8001 500mA 超低噪声 LDO",
+    "nameEn": "FM8001 500mA Ultra-Low-Noise LDO",
+    "summaryZh": "17μV RMS 超低噪声，65dB PSRR @ 1kHz，适用于传感器与 RF 供电。",
+    "summaryEn": "17μV RMS noise, 65dB PSRR @ 1kHz — ideal for sensor and RF supply.",
+    "descriptionZh": "FM8001 是一款低压差线性稳压器，在 1kHz 处提供 65dB 的高电源抑制比，输出噪声低至 17μVRMS，支持 2.2V–5.5V 输入，最大输出电流 500mA。",
+    "descriptionEn": "The FM8001 is a low-dropout linear regulator offering 65dB PSRR at 1kHz and 17μVRMS output noise, supporting 2.2V–5.5V input and up to 500mA output.",
+    "specsZh": [
+      { "label": "输入电压", "labelEn": "Input Voltage", "value": "2.2V – 5.5V" },
+      { "label": "输出电流", "labelEn": "Output Current", "value": "500mA" },
+      { "label": "压差", "labelEn": "Dropout", "value": "120mV @ 500mA" },
+      { "label": "输出噪声", "labelEn": "Output Noise", "value": "17μVRMS" },
+      { "label": "PSRR", "labelEn": "PSRR", "value": "65dB @ 1kHz" }
+    ],
+    "specsEn": [
+      { "label": "Input Voltage", "labelEn": "Input Voltage", "value": "2.2V – 5.5V" },
+      { "label": "Output Current", "labelEn": "Output Current", "value": "500mA" },
+      { "label": "Dropout", "labelEn": "Dropout", "value": "120mV @ 500mA" },
+      { "label": "Output Noise", "labelEn": "Output Noise", "value": "17μVRMS" },
+      { "label": "PSRR", "labelEn": "PSRR", "value": "65dB @ 1kHz" }
+    ],
+    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM8001.pdf",
+    "appNoteUrl": "https://cdn.fmw.example/appnotes/FM8001_AN.pdf",
+    "verificationLevel": "BENCH_TESTED",
+    "verifiedEvidence": "内部 benches 实测报告 BR-2026-0142：10 台样品于 25°C 验证 PSRR 与噪声指标。",
+    "verifiedEvidenceEn": "Internal bench report BR-2026-0142: PSRR and output noise verified on 10 samples at 25°C."
+  },
+  {
+    "id": "p-fm8002",
+    "mpn": "FM8002",
+    "category": "LDO",
+    "seriesId": "srv-ldo",
+    "nameZh": "FM8002 1A 高 PSRR LDO",
+    "nameEn": "FM8002 1A High-PSRR LDO",
+    "summaryZh": "1A 输出、70dB PSRR，宽温工业级版本。",
+    "summaryEn": "1A output, 70dB PSRR, industrial temp range.",
+    "descriptionZh": "FM8002 面向工业应用，支持 1A 连续输出，PSRR 达 70dB，工作温度范围 -40°C 至 125°C。",
+    "descriptionEn": "The FM8002 targets industrial use with 1A continuous output, 70dB PSRR and -40°C to 125°C operation.",
+    "specsZh": [
+      { "label": "输入电压", "labelEn": "Input Voltage", "value": "2.5V – 6.0V" },
+      { "label": "输出电流", "labelEn": "Output Current", "value": "1A" },
+      { "label": "PSRR", "labelEn": "PSRR", "value": "70dB @ 1kHz" },
+      { "label": "工作温度", "labelEn": "Temp Range", "value": "-40°C ~ 125°C" }
+    ],
+    "specsEn": [
+      { "label": "Input Voltage", "labelEn": "Input Voltage", "value": "2.5V – 6.0V" },
+      { "label": "Output Current", "labelEn": "Output Current", "value": "1A" },
+      { "label": "PSRR", "labelEn": "PSRR", "value": "70dB @ 1kHz" },
+      { "label": "Temp Range", "labelEn": "Temp Range", "value": "-40°C ~ 125°C" }
+    ],
+    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM8002.pdf",
+    "verificationLevel": "DATASHEET",
+    "verifiedEvidence": null
+  },
+  {
+    "id": "p-fm9001",
+    "mpn": "FM9001",
+    "category": "PMIC",
+    "seriesId": "srv-pmic",
+    "nameZh": "FM9001 三通道电源管理 IC",
+    "nameEn": "FM9001 3-Channel PMIC",
+    "summaryZh": "2×Buck + 1×LDO，集成锂电充电，待机功耗 < 5μA。",
+    "summaryEn": "2×Buck + 1×LDO with Li-ion charge, <5μA standby.",
+    "descriptionZh": "FM9001 集成两路同步降压与一路 LDO，内置线性锂电充电管理，适用于穿戴与便携设备。",
+    "descriptionEn": "The FM9001 integrates two synchronous bucks and one LDO with linear Li-ion charging for wearables and portables.",
+    "specsZh": [
+      { "label": "Buck 通道", "labelEn": "Buck Channels", "value": "2" },
+      { "label": "LDO 通道", "labelEn": "LDO Channels", "value": "1" },
+      { "label": "充电电流", "labelEn": "Charge Current", "value": "500mA" },
+      { "label": "待机功耗", "labelEn": "Standby", "value": "< 5μA" }
+    ],
+    "specsEn": [
+      { "label": "Buck Channels", "labelEn": "Buck Channels", "value": "2" },
+      { "label": "LDO Channels", "labelEn": "LDO Channels", "value": "1" },
+      { "label": "Charge Current", "labelEn": "Charge Current", "value": "500mA" },
+      { "label": "Standby", "labelEn": "Standby", "value": "< 5μA" }
+    ],
+    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM9001.pdf",
+    "verificationLevel": "BENCH_TESTED",
+    "verifiedEvidence": "内部 benches BR-2026-0201：效率曲线于 200mA/500mA 负载实测。",
+    "verifiedEvidenceEn": "Internal bench report BR-2026-0201: efficiency curve measured at 200mA / 500mA loads."
+  },
+  {
+    "id": "p-fm9002",
+    "mpn": "FM9002",
+    "category": "PMIC",
+    "seriesId": "srv-pmic",
+    "nameZh": "FM9002 四通道 PMIC",
+    "nameEn": "FM9002 4-Channel PMIC",
+    "summaryZh": "3×Buck + 1×Boost，I²C 可编程输出。",
+    "summaryEn": "3×Buck + 1×Boost, I²C programmable.",
+    "descriptionZh": "FM9002 提供三路降压与一路升压，支持 I²C 动态调压，面向多电压域 SoC 供电。",
+    "descriptionEn": "The FM9002 provides three bucks and one boost with I²C dynamic voltage scaling for multi-rail SoC power.",
+    "specsZh": [
+      { "label": "Buck 通道", "labelEn": "Buck Channels", "value": "3" },
+      { "label": "Boost 通道", "labelEn": "Boost Channels", "value": "1" },
+      { "label": "接口", "labelEn": "Interface", "value": "I²C" }
+    ],
+    "specsEn": [
+      { "label": "Buck Channels", "labelEn": "Buck Channels", "value": "3" },
+      { "label": "Boost Channels", "labelEn": "Boost Channels", "value": "1" },
+      { "label": "Interface", "labelEn": "Interface", "value": "I²C" }
+    ],
+    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM9002.pdf",
+    "verificationLevel": "INTERNAL",
+    "verifiedEvidence": null
+  },
+  {
+    "id": "p-fm3001",
+    "mpn": "FM3001",
+    "category": "MOSFET",
+    "seriesId": "srv-mos",
+    "nameZh": "FM3001 30V 60A N 沟道 MOSFET",
+    "nameEn": "FM3001 30V 60A N-Ch MOSFET",
+    "summaryZh": "Rds(on) 5.2mΩ，DFN 封装，高效同步整流。",
+    "summaryEn": "Rds(on) 5.2mΩ, DFN pkg, efficient sync-rect.",
+    "descriptionZh": "FM3001 为中低压 N 沟道 MOSFET，导通电阻 5.2mΩ，适用于同步整流与电机驱动。",
+    "descriptionEn": "The FM3001 is a low/mid-voltage N-ch MOSFET with 5.2mΩ Rds(on) for sync-rect and motor drive.",
+    "specsZh": [
+      { "label": "VDS", "labelEn": "VDS", "value": "30V" },
+      { "label": "ID", "labelEn": "ID", "value": "60A" },
+      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "5.2mΩ" }
+    ],
+    "specsEn": [
+      { "label": "VDS", "labelEn": "VDS", "value": "30V" },
+      { "label": "ID", "labelEn": "ID", "value": "60A" },
+      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "5.2mΩ" }
+    ],
+    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM3001.pdf",
+    "verificationLevel": "CERTIFIED",
+    "verifiedEvidence": "AEC-Q101 车规认证证书 CERT-2026-031：全温区 Rds(on) 与 BVdss 验证。",
+    "verifiedEvidenceEn": "AEC-Q101 automotive-grade certificate CERT-2026-031: full-temperature-range validation of Rds(on) and BVdss."
+  },
+  {
+    "id": "p-fm3002",
+    "mpn": "FM3002",
+    "category": "MOSFET",
+    "seriesId": "srv-mos",
+    "nameZh": "FM3002 20V 100A 双 N 沟道 MOSFET",
+    "nameEn": "FM3002 20V 100A Dual N-Ch MOSFET",
+    "summaryZh": "双管集成，Rds(on) 3.8mΩ，电池保护应用。",
+    "summaryEn": "Dual die, 3.8mΩ, battery-protection use.",
+    "descriptionZh": "FM3002 为双 N 沟道集成 MOSFET，适用于电池包保护与负载开关。",
+    "descriptionEn": "The FM3002 is a dual N-ch integrated MOSFET for battery-pack protection and load switching.",
+    "specsZh": [
+      { "label": "VDS", "labelEn": "VDS", "value": "20V" },
+      { "label": "ID", "labelEn": "ID", "value": "100A" },
+      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "3.8mΩ" }
+    ],
+    "specsEn": [
+      { "label": "VDS", "labelEn": "VDS", "value": "20V" },
+      { "label": "ID", "labelEn": "ID", "value": "100A" },
+      { "label": "Rds(on)", "labelEn": "Rds(on)", "value": "3.8mΩ" }
+    ],
+    "datasheetUrl": "https://cdn.fmw.example/datasheets/FM3002.pdf",
+    "verificationLevel": "DATASHEET",
+    "verifiedEvidence": null
+  }
+]

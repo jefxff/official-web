@@ -1,0 +1,66 @@
+@import "tailwindcss";
+
+/* 富满微品牌色板（v1.2 视觉基调） */
+@theme {
+  --color-brand: #1d5fd6;
+  --color-brand-dark: #12294f;
+  --color-ink: #1a2332;
+  --color-sub: #5a6b80;
+  --color-line: #e3e9f0;
+  --color-surface: #ffffff;
+  --color-bg: #f6f8fb;
+  --color-bench: #1e7d4f;
+
+  --font-sans: "PingFang SC", "Microsoft YaHei", "Segoe UI", system-ui,
+    sans-serif;
+}
+
+:root {
+  color-scheme: light;
+}
+
+body {
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  line-height: 1.7;
+}
+
+/* 复用类 */
+.container-page {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.prose-page p {
+  margin-bottom: 0.85rem;
+}
+
+a.link-brand {
+  color: var(--color-brand);
+  text-decoration: none;
+}
+a.link-brand:hover {
+  text-decoration: underline;
+}
+
+/* 后台表单输入控件 */
+.input {
+  width: 100%;
+  border: 1px solid var(--color-line);
+  border-radius: 8px;
+  padding: 8px 10px;
+  font-size: 14px;
+  background: #fff;
+  color: var(--color-ink);
+}
+.input:focus {
+  outline: none;
+  border-color: var(--color-brand);
+  box-shadow: 0 0 0 3px rgba(29, 95, 214, 0.12);
+}
+.input:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+}
